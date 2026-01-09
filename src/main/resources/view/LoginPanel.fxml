@@ -16,7 +16,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
       <VBox alignment="TOP_CENTER" style="-fx-background-color: #dcdcdc;">
          <children>
@@ -33,7 +33,7 @@
                      </font>
                   </Label>
                   <Separator prefHeight="11.0" prefWidth="800.0" />
-                  <TextField fx:id="loginField" prefHeight="45.0" prefWidth="600.0" text="Login">
+                  <TextField fx:id="loginField" prefHeight="45.0" prefWidth="600.0" text="login">
                      <font>
                         <Font name="System Italic" size="14.0" />
                      </font>
@@ -83,7 +83,7 @@
             </VBox>
             <HBox alignment="CENTER" prefHeight="76.0" prefWidth="600.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="61.0" prefWidth="115.0" style="-fx-background-color: #87B3F5;" text="Zaloguj się" textAlignment="CENTER" underline="true">
+                  <Button fx:id="loginBut" mnemonicParsing="false" onAction="#login" prefHeight="61.0" prefWidth="115.0" style="-fx-background-color: #87B3F5;" text="Zaloguj się" textAlignment="CENTER" underline="true">
                      <font>
                         <Font size="18.0" />
                      </font>
