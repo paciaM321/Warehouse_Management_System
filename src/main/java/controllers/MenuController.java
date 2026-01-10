@@ -109,7 +109,7 @@ public class MenuController {
 
     public void menubut5(ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/AdminPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/AdminPanels/AdminPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("AdminPanel");

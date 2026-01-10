@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminEditPlaceController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <BorderPane prefHeight="55.0" prefWidth="200.0" />
+            <Separator prefWidth="200.0" />
+            <HBox alignment="CENTER" prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Label text="Edytuj informacje miejsca">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="65.0" prefHeight="55.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="TOP_LEFT" text="Location:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="editlocation" />
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox prefHeight="55.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="TOP_LEFT" text="Part nr.">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Separator prefWidth="200.0" />
+                  <HBox prefHeight="55.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="TOP_LEFT" text="Quantity">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Separator layoutX="10.0" layoutY="65.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="delPartBut" mnemonicParsing="false" onAction="#delPartbutAction" text="usuń produkt z lokalizacji">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Label text=" opcja dodatkowa do wyboru   usun trwale lub tylko z miejsca" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="396.0" prefHeight="55.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="saveBut" mnemonicParsing="false" onAction="#savebutAction" text="potwierdź">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Separator layoutX="10.0" layoutY="65.0" prefWidth="200.0" />
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="451.0" prefHeight="55.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="adminmenuBut" mnemonicParsing="false" onAction="#adminMenubutAction" text="AdminMenu">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

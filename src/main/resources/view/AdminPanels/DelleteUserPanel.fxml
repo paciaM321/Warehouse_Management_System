@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminDelUserPanelController">
+    <children>
+        <VBox prefHeight="200.0" prefWidth="100.0">
+            <children>
+                <BorderPane prefHeight="30.0" prefWidth="200.0" />
+                <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="200.0">
+                    <children>
+                        <Label text="Usuń Użytkownika">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="250.0" prefWidth="200.0">
+                    <children>
+                        <TableView fx:id="UserTable" prefHeight="100.0" prefWidth="800.0">
+                            <columns>
+                                <TableColumn prefWidth="75.0" text="C1" />
+                                <TableColumn prefWidth="75.0" text="C2" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </HBox>
+                <Separator prefWidth="200.0" />
+                <HBox prefHeight="55.0" prefWidth="200.0">
+                    <children>
+                        <Label text="User_id">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="User_id" promptText="user ID">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </TextField>
+                        <BorderPane prefHeight="55.0" prefWidth="98.0" />
+                        <Label layoutX="10.0" layoutY="10.0" text="trwale usuń użytkownika">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                  <Button fx:id="deleteBut" mnemonicParsing="false" onAction="#deletebutAction" text="Usuń">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                    </children>
+                </HBox>
+                <Separator prefWidth="200.0" />
+                <Separator layoutX="10.0" layoutY="380.0" prefWidth="200.0" />
+                <Separator layoutX="10.0" layoutY="380.0" prefWidth="200.0" />
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="286.0" prefHeight="50.0" prefWidth="200.0">
+                    <children>
+                        <Button fx:id="adminmenuBut" mnemonicParsing="false" onAction="#adminMenubutAction" text="AdminMenu">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</StackPane>

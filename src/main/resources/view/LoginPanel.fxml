@@ -33,7 +33,7 @@
                      </font>
                   </Label>
                   <Separator prefHeight="11.0" prefWidth="800.0" />
-                  <TextField fx:id="loginField" prefHeight="45.0" prefWidth="600.0" text="login">
+                  <TextField fx:id="loginField" prefHeight="45.0" prefWidth="600.0" promptText="login">
                      <font>
                         <Font name="System Italic" size="14.0" />
                      </font>
@@ -88,6 +88,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
+                  <Label fx:id="messageLabel" text="" textFill="RED" />
                </children>
             </HBox>
          </children>

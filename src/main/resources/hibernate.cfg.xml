@@ -17,7 +17,7 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
 
-        <mapping class="models.User"/>
+        <mapping class="controllers.User"/>
         <mapping class="models.Course"/>
         <mapping class="models.UserCourse"/>
     </session-factory>
