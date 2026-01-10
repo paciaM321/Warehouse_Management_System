@@ -52,7 +52,7 @@ public class MenuController {
 
     public void menubut2(ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/OrderListPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/OrdersListPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("OrderListPanel");

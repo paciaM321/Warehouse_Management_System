@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -11,8 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"fx:controller="controllers.EditLocationPanelController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -25,6 +25,7 @@
                   </Label>
                </center>
             </BorderPane>
+            <Separator layoutX="10.0" layoutY="210.0" prefWidth="200.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Number loc. :">
@@ -38,7 +39,7 @@
                      </font>
                   </TextField>
                   <BorderPane layoutX="318.0" layoutY="10.0" prefHeight="100.0" prefWidth="7.0" />
-                  <Button mnemonicParsing="false" text="Button" />
+                  <Button fx:id="submitBut" mnemonicParsing="false" onAction="#submitbutAction" text="Button" />
                   <BorderPane prefHeight="100.0" prefWidth="62.0" />
                   <TableView prefHeight="150.0" prefWidth="200.0">
                     <columns>
@@ -48,6 +49,7 @@
                   </TableView>
                </children>
             </HBox>
+            <Separator prefWidth="200.0" />
             <HBox prefHeight="75.0" prefWidth="200.0">
                <children>
                   <Label text="Part nr. :">
@@ -63,6 +65,7 @@
                   </Label>
                </children>
             </HBox>
+            <Separator layoutX="10.0" layoutY="210.0" prefWidth="200.0" />
             <HBox layoutX="10.0" layoutY="230.0" prefHeight="75.0" prefWidth="200.0">
                <children>
                   <Label text="NEW Part nr. :">
@@ -78,9 +81,23 @@
                   </Label>
                </children>
             </HBox>
+            <Separator layoutX="10.0" layoutY="288.0" prefWidth="200.0" />
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" text="zatwierdż" />
+                  <Button fx:id="saveBut" mnemonicParsing="false" onAction="#savebutAction" text="zatwierdź">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="360.0" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="menuBut" mnemonicParsing="false" onAction="#menubutAction" text="menu">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </HBox>
          </children>
