@@ -2,7 +2,7 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/online_courses</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/database_storagesystem</property>
         <property name="hibernate.connection.username">pacia</property>
         <property name="hibernate.connection.password">pacia</property> <!-- Leave blank if no password -->
 
@@ -17,8 +17,11 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
 
-        <mapping class="controllers.User"/>
-        <mapping class="models.Course"/>
-        <mapping class="models.UserCourse"/>
+        <mapping class="models.User"/>
+        <mapping class="models.Puter"/>
+        <mapping class="models.Part"/>
+        <mapping class="models.Picker"/>
+        <mapping class="models.MasterOrder"/>
+        <mapping class="models.MasterPuter"/>
     </session-factory>
 </hibernate-configuration>

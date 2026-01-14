@@ -1,4 +1,4 @@
-package controllers;
+package controllers.AdminPanelsControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -97,7 +97,7 @@ public class AdminPanelController {
                 }
     public void menubutAction (ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/menuPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/menuPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("MenuPanel");

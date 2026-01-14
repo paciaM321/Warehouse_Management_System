@@ -4,15 +4,48 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30caa984-c0c0-4475-9f97-1a15982668a6" name="Changes" comment="dodanie nowych widoków oraz nowych kontrolerów">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/EditLocationPanelController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/OrderListController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/OrdersListController.java" afterDir="false" />
+    <list default="true" id="30caa984-c0c0-4475-9f97-1a15982668a6" name="Changes" comment="dodanie nowych widoków oraz ich kontrolerów">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/MasterPanelsControllers/MasterAddController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/MasterPanelsControllers/MasterEditController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/MasterPanelsControllers/MasterMenuController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/WorkersPanelsControllers/RelockController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/Admin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/MasterOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/MasterPuter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/Part.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/Picker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/Puter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/DatabaseTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/MorderADDPanel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/MorderEditPanel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/OrderMasterMenuPanel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/WorkersPanels/PutMasterPanel.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminAddPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminAddPanelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminDelUserPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminDelUserPanelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminEditPlaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminEditPlaceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminPanelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/EditLocationPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/EditLocationPanelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/EditUserPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/EditUserPanelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/EditPlacePanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/EditLocationPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/OrderListPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/OrdersListPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/OrrderListPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/OrrderListPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/OrderListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/WorkersPanelsControllers/OrderListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/OrdersListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/WorkersPanelsControllers/OrdersListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PutPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/WorkersPanelsControllers/PutPanelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/AdminPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/AdminPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/DelleteUserPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/DelleteUserPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/EditInfoPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/EditInfoPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/EditPlacePanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/EditPlacePanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/EditLocationPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/WorkersPanels/EditLocationPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/LoginPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/WorkersPanels/LoginPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/OrdersListPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/WorkersPanels/OrdersListPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/OrrderListPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/WorkersPanels/OrrderListPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/RelockPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/WorkersPanels/RelockPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/menuPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/WorkersPanels/menuPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/putPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/WorkersPanels/putPanel.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +78,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.DatabaseTest.executor": "Run",
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -59,6 +93,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Filip\IdeaProjects\system_zarzadzania_magazynem\system_zarzadania_magazynem\src\main\resources\view\WorkersPanels" />
       <recent name="C:\Users\Filip\IdeaProjects\system_zarzadzania_magazynem\system_zarzadania_magazynem\src\main\resources\view\AdminPanels" />
       <recent name="C:\Users\Filip\IdeaProjects\system_zarzadzania_magazynem\system_zarzadania_magazynem\src\main\java" />
       <recent name="C:\Users\Filip\IdeaProjects\system_zarzadzania_magazynem\system_zarzadania_magazynem\src\main\resources\view" />
@@ -67,6 +102,20 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="system_zarzadania_magazynem" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -117,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768013994178</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="dodanie nowych widoków oraz ich kontrolerów">
+      <option name="closed" value="true" />
+      <created>1768016450068</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1768016450068</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -134,6 +191,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="utworzenie widoków" />
     <MESSAGE value="dodanie nowych widoków oraz nowych kontrolerów" />
-    <option name="LAST_COMMIT_MESSAGE" value="dodanie nowych widoków oraz nowych kontrolerów" />
+    <MESSAGE value="dodanie nowych widoków oraz ich kontrolerów" />
+    <option name="LAST_COMMIT_MESSAGE" value="dodanie nowych widoków oraz ich kontrolerów" />
   </component>
 </project>

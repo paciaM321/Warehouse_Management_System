@@ -1,4 +1,4 @@
-package controllers;
+package controllers.AdminPanelsControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,24 +10,26 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AdminDelUserPanelController {
+public class EditLocationPanelController {
+   @FXML
+   private Button submitBut;
     @FXML
-    private Button deleteBut;
+    private Button saveBut;
     @FXML
-    private Button adminmenuBut;
+    private Button menuBut;
 
 
-    public void deletebutAction (ActionEvent event) throws Exception {
+    public void savebutAction (ActionEvent event) throws Exception {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/AdminPanels/AdminPanel.fxml"));
 
             Stage stage = new Stage();
-            stage.setTitle("DelUserPanel");
+            stage.setTitle("AddUserPanel");
             stage.setScene(new Scene(root));
             stage.show();
 
 
-            Stage mainStage = (Stage) deleteBut.getScene().getWindow();
+            Stage mainStage = (Stage) saveBut.getScene().getWindow();
             mainStage.hide();
 
 
@@ -35,9 +37,9 @@ public class AdminDelUserPanelController {
             e.printStackTrace();
         }
     }
-    public void adminMenubutAction (ActionEvent event) throws Exception {
+    public void menubutAction (ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/AdminPanels/AdminPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/menuPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("MenuPanel");
@@ -45,7 +47,7 @@ public class AdminDelUserPanelController {
             stage.show();
 
 
-            Stage mainStage = (Stage) adminmenuBut.getScene().getWindow();
+            Stage mainStage = (Stage) menuBut.getScene().getWindow();
             mainStage.hide();
 
 
@@ -53,6 +55,5 @@ public class AdminDelUserPanelController {
             e.printStackTrace();
         }
     }
-
 
 }

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.AdminPanelsControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +10,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class EditUserPanelController {
+public class AdminEditPlaceController {
+    @FXML
+    private Button delPartBut;
     @FXML
     private Button saveBut;
     @FXML

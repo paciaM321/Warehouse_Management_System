@@ -27,13 +27,15 @@ public class MenuController {
 
     @FXML
     private Button adminbut;
+    @FXML
+    private Button masterBut;
 
     @FXML
-    private Button exitbut;
+    private Button exitBut;
 
     public void menubut1(ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/putPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/putPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("PutPanel");
@@ -52,7 +54,7 @@ public class MenuController {
 
     public void menubut2(ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/OrdersListPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/OrdersListPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("OrderListPanel");
@@ -71,7 +73,7 @@ public class MenuController {
 
     public void menubut3(ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/RelockPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/RelockPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("RelockPanel");
@@ -90,7 +92,7 @@ public class MenuController {
 
     public void menubut4(ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/EditPacePanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/EditLocationPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("EditPanel");
@@ -126,9 +128,9 @@ public class MenuController {
         }
     }
 
-    public void menubut6(ActionEvent event) throws Exception {
+    public void MasterbutAction(ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/LoginPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/OrderMasterPanel/OrderMasterMenuPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("exit");
@@ -136,7 +138,26 @@ public class MenuController {
             stage.show();
 
 
-            Stage mainStage=(Stage) exitbut.getScene().getWindow();
+            Stage mainStage=(Stage) masterBut.getScene().getWindow();
+            mainStage.hide();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void menubut6(ActionEvent event) throws Exception {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/LoginPanel.fxml"));
+
+            Stage stage = new Stage();
+            stage.setTitle("exit");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+
+            Stage mainStage=(Stage) exitBut.getScene().getWindow();
             mainStage.hide();
 
 

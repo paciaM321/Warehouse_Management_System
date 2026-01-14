@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <BorderPane prefHeight="55.0" prefWidth="200.0" />
+            <HBox alignment="TOP_CENTER" prefHeight="55.0" prefWidth="200.0">
+               <children>
+                  <Label text="Dodaj Przedmiot">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="65.0" prefWidth="200.0">
+               <children>
+                  <Label text="Part_nazwa">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <BorderPane prefHeight="55.0" prefWidth="100.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Part_nr">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="80.0" layoutY="10.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="120.0" prefHeight="65.0" prefWidth="200.0">
+               <children>
+                  <Label text="Part ID:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <BorderPane prefHeight="55.0" prefWidth="100.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Quantity">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="80.0" layoutY="10.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="186.0" prefHeight="65.0" prefWidth="200.0">
+               <children>
+                  <Label text="Part ID:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <BorderPane prefHeight="55.0" prefWidth="100.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Quantity">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="80.0" layoutY="10.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

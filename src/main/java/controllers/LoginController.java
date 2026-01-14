@@ -3,7 +3,6 @@ package controllers;
 
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import models.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class LoginController {
         }
     }
 
-    // 4. Metoda weryfikująca - musi mieć 'return'!
+    // 4. Metoda weryfikująca
     private User authenticate(String login, String haslo) {
         return userDatabase.stream()
                 .filter(u -> u.getLogin().equals(login) && u.getHaslo().equals(haslo))
@@ -69,14 +69,14 @@ public class LoginController {
             messageLabel.setText("Zalogowano pomyślnie jako Administrator. Zaraz nastąpi przekierowanie...");
             messageLabel.setStyle("-fx-text-fill: green;");
 
-            PauseTransition pause = new PauseTransition(Duration.seconds(4));
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
             pause.setOnFinished(event -> loginNextPage());
             pause.play();
         } else {
             messageLabel.setText("Zalogowano pomyślnie. Zaraz nastąpi przekierowanie...");
             messageLabel.setStyle("-fx-text-fill: green;");
 
-            PauseTransition pause = new PauseTransition(Duration.seconds(4));
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
             pause.setOnFinished(event -> loginNextPage());
             pause.play();
         }
@@ -84,7 +84,7 @@ public class LoginController {
 
     private void loginNextPage() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/menuPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/menuPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("Menu");

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.WorkersPanelsControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,9 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class EditLocationPanelController {
-   @FXML
-   private Button submitBut;
+public class OrderListController {
     @FXML
     private Button saveBut;
     @FXML
@@ -39,7 +37,7 @@ public class EditLocationPanelController {
     }
     public void menubutAction (ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/menuPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/menuPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("MenuPanel");
@@ -55,5 +53,4 @@ public class EditLocationPanelController {
             e.printStackTrace();
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.AdminPanelsControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,24 +10,24 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AdminAddPanelController {
+public class AdminDelUserPanelController {
     @FXML
-    private Button saveBut;
+    private Button deleteBut;
     @FXML
     private Button adminmenuBut;
 
 
-    public void savebutAction (ActionEvent event) throws Exception {
+    public void deletebutAction (ActionEvent event) throws Exception {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/AdminPanels/AdminPanel.fxml"));
 
             Stage stage = new Stage();
-            stage.setTitle("AddUserPanel");
+            stage.setTitle("DelUserPanel");
             stage.setScene(new Scene(root));
             stage.show();
 
 
-            Stage mainStage = (Stage) saveBut.getScene().getWindow();
+            Stage mainStage = (Stage) deleteBut.getScene().getWindow();
             mainStage.hide();
 
 
@@ -53,15 +53,6 @@ public class AdminAddPanelController {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-
-
-
 
 
 }

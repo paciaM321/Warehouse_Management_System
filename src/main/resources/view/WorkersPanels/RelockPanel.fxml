@@ -9,12 +9,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WorkersPanelsControllers.RelockController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <VBox prefHeight="100.0" prefWidth="100.0">
          <children>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" />
+            <BorderPane prefHeight="100.0" prefWidth="200.0" />
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Zmien lokalizacje produktu">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label layoutX="464.0" layoutY="52.0" text="Part nr. :">
@@ -43,7 +51,7 @@
             <BorderPane prefHeight="35.0" prefWidth="200.0" />
             <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="464.0" layoutY="52.0" text="Part nr. :">
+                  <Label layoutX="464.0" layoutY="52.0" text="New Part nr. :">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -54,7 +62,7 @@
                      </font>
                   </TextField>
                   <BorderPane prefHeight="100.0" prefWidth="100.0" />
-                  <Label layoutX="10.0" layoutY="10.0" text="Location">
+                  <Label layoutX="10.0" layoutY="10.0" text="NEW Location">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -68,7 +76,16 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" text="Button" underline="true">
+                  <Button fx:id="savebut" mnemonicParsing="false" onAction="#savebutAction" text="Zapisz" underline="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="445.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="menuBut" mnemonicParsing="false" onAction="#menubutAction" text="Menu" underline="true">
                      <font>
                         <Font size="16.0" />
                      </font>
