@@ -1,8 +1,14 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
+@Entity
+@Table(name = "users")
+
 public class User {
+
  private int user_id;
  private String login;
  private String haslo;
@@ -27,7 +33,41 @@ public class User {
  public  Date getData_urodzenia() {return data_urodzenia; }
 
 
+ public void setUser_id(int user_id) {
+  this.user_id = user_id;
+ }
 
+ public void setLogin(String login) {
+  this.login = login;
+ }
 
+ public void setHaslo(String haslo) {
+  this.haslo = haslo;
+ }
 
+ public void setRole(String role) {
+  this.role = role;
+ }
+
+ public void setImie(String imie) {
+  this.imie = imie;
+ }
+
+ public void setNazwisko(String nazwisko) {
+  this.nazwisko = nazwisko;
+ }
+
+ public void setData_urodzenia(Date data_urodzenia) {
+  this.data_urodzenia = data_urodzenia;
+ }
+
+ public User(int user_id, String login, String haslo, String role, String imie, String nazwisko, Date data_urodzenia) {
+  this.user_id = user_id;
+  this.login = login;
+  this.haslo = haslo;
+  this.role = role;
+  this.imie = imie;
+  this.nazwisko = nazwisko;
+  this.data_urodzenia = data_urodzenia;
+ }
 }

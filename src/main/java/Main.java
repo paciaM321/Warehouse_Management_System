@@ -11,7 +11,7 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/LoginPanel.fxml"));
         stage.setTitle("DPD");
-        stage.setScene(new Scene(root));
+         stage.setScene(new Scene(root));
         stage.show();
 
 

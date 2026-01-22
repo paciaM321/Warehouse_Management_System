@@ -14,7 +14,7 @@
       <VBox prefHeight="261.0" prefWidth="796.0" style="-fx-background-color: #dcdcdc;">
          <children>
             <BorderPane prefHeight="180.0" prefWidth="200.0" />
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="TOP_CENTER" prefHeight="55.0" prefWidth="200.0">
                <children>
                   <Label text="part nr. :">
                      <font>
@@ -39,9 +39,37 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="TOP_CENTER" prefHeight="55.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="saveBut" mnemonicParsing="false" prefHeight="55.0" prefWidth="100.0" style="-fx-background-color: #87B3F5;" text="Zatwierdź" underline="true">
+                  <Label text="part id:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="part_nrField1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <BorderPane prefHeight="100.0" prefWidth="100.0" />
+                  <Label text="Location :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="locationField1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="120.0" />
+                  <Label fx:id="statusLabel" textFill="DARKBLUE" />
+                  <BorderPane prefHeight="100.0" prefWidth="230.0" />
+                  <Button fx:id="saveBut" mnemonicParsing="false" onAction="#putAwayPart" prefHeight="55.0" prefWidth="100.0" style="-fx-background-color: #87B3F5;" text="Zatwierdź" underline="true">
                      <font>
                         <Font size="16.0" />
                      </font>
