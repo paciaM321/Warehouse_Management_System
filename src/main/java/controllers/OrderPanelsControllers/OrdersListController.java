@@ -1,4 +1,4 @@
-package controllers.WorkersPanelsControllers;
+package controllers.OrderPanelsControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

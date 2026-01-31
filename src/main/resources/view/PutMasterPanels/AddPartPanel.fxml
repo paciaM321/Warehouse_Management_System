@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PutPanelsControllers.AddPartController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -23,19 +23,19 @@
                   </Label>
                </children>
             </HBox>
-            <HBox prefHeight="65.0" prefWidth="200.0">
+            <HBox prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Label text="Part_nazwa">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="PartNameField">
+                  <TextField fx:id="partNameField">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <BorderPane prefHeight="55.0" prefWidth="100.0" />
+                  <BorderPane prefHeight="66.0" prefWidth="30.0" />
                   <Label layoutX="10.0" layoutY="10.0" text="Part_nr">
                      <font>
                         <Font size="14.0" />
@@ -46,27 +46,13 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-               </children>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="120.0" prefHeight="65.0" prefWidth="200.0">
-               <children>
-                  <Label text="Part ID:">
+                  <BorderPane layoutX="253.0" layoutY="10.0" prefHeight="66.0" prefWidth="30.0" />
+                  <Label text="Quantity">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <BorderPane prefHeight="55.0" prefWidth="100.0" />
-                  <Label layoutX="10.0" layoutY="10.0" text="Quantity">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="quantityField" layoutX="80.0" layoutY="10.0">
+                  <TextField fx:id="quantityField">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -76,6 +62,26 @@
             <HBox alignment="CENTER" layoutX="10.0" layoutY="186.0" prefHeight="65.0" prefWidth="200.0">
                <children>
                   <Button fx:id="addBut" mnemonicParsing="false" onAction="#AddPartToStorage" text="Dodaj">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="120.0" prefHeight="65.0" prefWidth="200.0">
+               <children>
+                  <Label text="Part ID:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="partID" />
+                  <BorderPane prefHeight="55.0" prefWidth="100.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="252.0" prefHeight="65.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="menuBut" mnemonicParsing="false" onAction="#menubutAction" text="menu">
                      <font>
                         <Font size="14.0" />
                      </font>

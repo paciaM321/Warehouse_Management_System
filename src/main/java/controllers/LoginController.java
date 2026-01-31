@@ -1,5 +1,7 @@
 
 package controllers;
+import models.User;
+import database.HibernateUtil;
 
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
@@ -12,11 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import models.User;
-
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class LoginController {
 
@@ -27,26 +28,30 @@ public class LoginController {
     @FXML
     private Button loginBut;
     @FXML
-    private Label messageLabel; // Pamiętaj, aby dodać Label w Scene Builderze i nadać mu fx:id="messageLabel"
+    private Label messageLabel;
 
-    // 1. Pola klasy muszą być tutaj, nie wewnątrz metod
-    private List<User> userDatabase = new ArrayList<>();
 
-    // 2. Metoda initialize uruchamia się automatycznie przy starcie okna
-    public void initialize() {
-        // Dodajemy przykładowych użytkowników
-        userDatabase.add(new User("admin", "1234", "ADMIN"));
-        userDatabase.add(new User("jan", "haslo1", "USER"));
+    public User validateLogin(String login, String password) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // Zapytanie HQL (Hibernate Query Language)
+            String hql = "FROM User WHERE login = :login AND password = :password";
+            Query<User> query = session.createQuery(hql, User.class);
+            query.setParameter("login", login);
+            query.setParameter("password", password);
+
+            return query.uniqueResult(); // Zwróci obiekt User lub null jeśli nie znajdzie
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    // 3. Główna metoda obsługująca kliknięcie przycisku
     @FXML
     protected void login() {
         String inputLogin = loginField.getText();
         String inputHaslo = passwordField.getText();
 
-        // Sprawdzamy autentykację (używamy małych liter dla nazw zmiennych)
-        User loggedInUser = authenticate(inputLogin, inputHaslo);
+        User loggedInUser = validateLogin(inputLogin, inputHaslo);
 
         if (loggedInUser != null) {
             if (messageLabel != null) messageLabel.setText("Zalogowano jako: " + loggedInUser.getRole());
@@ -56,48 +61,60 @@ public class LoginController {
         }
     }
 
-    // 4. Metoda weryfikująca
-    private User authenticate(String login, String haslo) {
-        return userDatabase.stream()
-                .filter(u -> u.getLogin().equals(login) && u.getHaslo().equals(haslo))
-                .findFirst()
-                .orElse(null);
-    }
 
     private void przejdzDoAplikacji(User user) {
-        if (user.getRole().equals("ADMIN")) {
-            messageLabel.setText("Zalogowano pomyślnie jako Administrator. Zaraz nastąpi przekierowanie...");
-            messageLabel.setStyle("-fx-text-fill: green;");
+        messageLabel.setText("Zalogowano pomyślnie jako " + user.getRole() + ". Przekierowanie...");
+        messageLabel.setStyle("-fx-text-fill: green;");
 
-            PauseTransition pause = new PauseTransition(Duration.seconds(2));
-            pause.setOnFinished(event -> loginNextPage());
-            pause.play();
-        } else {
-            messageLabel.setText("Zalogowano pomyślnie. Zaraz nastąpi przekierowanie...");
-            messageLabel.setStyle("-fx-text-fill: green;");
-
-            PauseTransition pause = new PauseTransition(Duration.seconds(2));
-            pause.setOnFinished(event -> loginNextPage());
-            pause.play();
-        }
+        PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+        pause.setOnFinished(event -> loginNextPage(user.getRole())); // Przekazujemy rolę
+        pause.play();
     }
 
-    private void loginNextPage() {
+    private void loginNextPage(String role) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/menuPanel.fxml"));
+            String fxmlPath = "";
+            String title = "";
+
+            // Logika wyboru odpowiedniego widoku na podstawie roli
+            switch (role.toUpperCase()) {
+                case "ADMIN":
+                    fxmlPath = "/view/AdminPanels/AdminPanel.fxml";
+                    title = "Panel Administratora";
+                    break;
+                case "PUT":
+                    fxmlPath = "/view/PutMasterPanels/PutMenuPanel.fxml";
+                    title = "Panel Przyjęć (PUT)";
+                    break;
+                case "ORDER":
+                    fxmlPath = "/view/OrderMasterPanel/OrderMasterMenuPanel.fxml";
+                    title = "Panel Zamówień (ORDER)";
+                    break;
+                default:
+                    fxmlPath = "/view/WorkersPanels/LoginPanel.fxml";
+                    title = "login";
+                    break;
+            }
+
+            // Ładowanie wybranego pliku FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
 
             Stage stage = new Stage();
-            stage.setTitle("Menu");
+            stage.setTitle(title);
             stage.setScene(new Scene(root));
             stage.show();
 
-
-            Stage mainStage=(Stage) loginBut.getScene().getWindow();
-            mainStage.hide();
-
+            Stage mainStage = (Stage) loginBut.getScene().getWindow();
+            mainStage.close();
 
         } catch (IOException e) {
             e.printStackTrace();
+            if (messageLabel != null) {
+                messageLabel.setText("Błąd ładowania widoku: " + role);
+                messageLabel.setStyle("-fx-text-fill: red;");
+            }
         }
     }
+
     }

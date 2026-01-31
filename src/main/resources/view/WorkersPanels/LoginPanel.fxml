@@ -53,7 +53,7 @@
                      </effect>
                   </TextField>
                   <BorderPane prefHeight="25.0" prefWidth="200.0" />
-                  <PasswordField fx:id="passwordField" prefHeight="45.0" prefWidth="600.0" promptText="haslo">
+                  <PasswordField fx:id="passwordField" onAction="#login" prefHeight="45.0" prefWidth="600.0" promptText="haslo">
                      <effect>
                         <Lighting>
                            <light>

@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PutPanelsControllers.EditPartController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -30,16 +29,20 @@
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="50.0" />
                   <Label text="Numer Produktu" />
-                  <TextField />
+                  <TextField fx:id="partNrField" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="50.0" />
-                  <TableView prefHeight="200.0" prefWidth="500.0">
+                  <TableView fx:id="partsTable" prefHeight="200.0" prefWidth="500.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="colID" prefWidth="40.79999005794525" text="ID" />
+                      <TableColumn fx:id="colPartNr" prefWidth="91.20001983642578" text="PartNr" />
+                        <TableColumn fx:id="colPartName" prefWidth="84.79997253417969" text="PartName" />
+                        <TableColumn fx:id="colQuantity" prefWidth="55.199951171875" text="Quantity" />
+                        <TableColumn fx:id="colLocation" prefWidth="89.5999755859375" text="Location" />
+                        <TableColumn fx:id="colStatus" prefWidth="92.79998779296875" text="Status" />
                     </columns>
                   </TableView>
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="50.0" />
@@ -47,7 +50,13 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="220.0" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" text="zapisz">
+                  <Button fx:id="saveBut" mnemonicParsing="false" onAction="#SaveDataAction" text="zapisz">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <BorderPane prefHeight="50.0" prefWidth="130.0" />
+                  <Button fx:id="delBut" layoutX="216.0" layoutY="20.0" mnemonicParsing="false" onAction="#DelDataAction" text="usuń trwale rekord">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -58,27 +67,36 @@
                <children>
                   <BorderPane prefHeight="30.0" prefWidth="45.0" />
                   <Label text="Numer Produktu" />
-                  <TextField />
+                  <TextField fx:id="NewPartNrField" />
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="34.0" />
                   <Label layoutX="60.0" layoutY="10.0" text="Nazwa Produktu" />
-                  <TextField layoutX="149.0" layoutY="10.0" />
+                  <TextField fx:id="newPartNameField" layoutX="149.0" layoutY="10.0" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="228.0" prefHeight="30.0" prefWidth="200.0">
                <children>
                   <BorderPane prefHeight="30.0" prefWidth="45.0" />
-                  <Label text="Quantity" />
-                  <TextField />
+                  <Label text="ilość" />
+                  <TextField fx:id="newQuantityFieldq" />
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="34.0" />
-                  <Label layoutX="60.0" layoutY="10.0" text="created byID:" />
-                  <TextField layoutX="149.0" layoutY="10.0" />
+                  <Label layoutX="60.0" layoutY="10.0" text="lokacja:" />
+                  <TextField fx:id="locationfFeld" layoutX="149.0" layoutY="10.0" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="259.0" prefHeight="30.0" prefWidth="200.0">
                <children>
                   <BorderPane prefHeight="30.0" prefWidth="45.0" />
                   <Label text="ID Produktu" />
-                  <TextField />
+                  <TextField fx:id="idField" editable="false" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="menuBut" mnemonicParsing="false" onAction="#menuAction" text="menu">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </HBox>
          </children>

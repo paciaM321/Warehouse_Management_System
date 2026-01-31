@@ -1,7 +1,6 @@
 package database;
 
 import models.OrderList;
-import models.Placement;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

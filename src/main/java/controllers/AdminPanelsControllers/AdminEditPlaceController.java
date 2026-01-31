@@ -39,7 +39,7 @@ public class AdminEditPlaceController {
     }
     public void adminMenubutAction (ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/AdminPanels/AdminPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/PutMasterPanels/PunMenuPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("MenuPanel");

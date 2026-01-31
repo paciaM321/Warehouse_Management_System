@@ -1,4 +1,4 @@
-package controllers;
+package controllers.WorkersPanelsControllers;
 
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
@@ -35,7 +35,7 @@ public class MenuController {
 
     public void menubut1(ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/putPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/PutMasterPanels/putPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("PutPanel");
@@ -54,7 +54,7 @@ public class MenuController {
 
     public void menubut2(ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/OrdersListPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/OrderMasterPanel/OrdersListPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("OrderListPanel");

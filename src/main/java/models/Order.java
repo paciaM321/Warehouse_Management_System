@@ -1,57 +1,39 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
     @Id
-    private int  order_id;
-    private String company;
-    private String order_list_id;
-    private int user_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    public Order(int order_id, String company, String order_list_id,int user_id){
+    @Column(name = "user_id")
+    private int userId;
 
-        this.order_id = order_id;
-        this.company = company;
-        this.order_list_id = order_list_id;
-        this.user_id = user_id;
-    }
+    @Column(name = "order_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date orderDate;
 
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public void setOrder_list_id(String order_list_id) {
-        this.order_list_id = order_list_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
-    public int getOrder_id() {
-        return order_id;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public String getOrder_list_id() {
-        return order_list_id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
+    private String status;
 
     public Order() {}
+
+    public Order(int userId, String status) {
+        this.userId = userId;
+        this.status = status;
+        this.orderDate = new Date(); // Automatyczna data zamówienia
+    }
+
+    // Gettery i Settery
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public int getUserId() { return userId; }
+    public void setUserId(int userId) { this.userId = userId; }
+    public Date getOrderDate() { return orderDate; }
+    public void setOrderDate(Date orderDate) { this.orderDate = orderDate; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }
