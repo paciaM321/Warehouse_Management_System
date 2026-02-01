@@ -17,13 +17,15 @@ public class Order {
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
 
+    private String client;
     private String status;
 
     public Order() {}
 
-    public Order(int userId, String status) {
+    public Order(int userId, String status,String client) {
         this.userId = userId;
         this.status = status;
+        this.client = client;
         this.orderDate = new Date(); // Automatyczna data zamówienia
     }
 
@@ -36,4 +38,6 @@ public class Order {
     public void setOrderDate(Date orderDate) { this.orderDate = orderDate; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    public String getClient() {return client; }
+    public void setClient(String client) {this.client = client; }
 }

@@ -4,19 +4,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MasterPanelsControllers.MasterEditController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.OrderPanelsControllers.OrderEditController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
-            <BorderPane prefHeight="55.0" prefWidth="200.0" />
-            <HBox alignment="TOP_CENTER" prefHeight="55.0" prefWidth="200.0">
+            <BorderPane prefHeight="5.0" prefWidth="800.0" />
+            <HBox alignment="TOP_CENTER" prefHeight="20.0" prefWidth="200.0">
                <children>
                   <Label text="Edytuj Zamówienie">
                      <font>
@@ -25,17 +25,194 @@
                   </Label>
                </children>
             </HBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="150.0" prefWidth="800.0">
                <children>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="ordersTable" prefHeight="150.0" prefWidth="800.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="colOrderId" prefWidth="75.0" text="ORDER ID" />
+                      <TableColumn fx:id="colClient" prefWidth="312.0" text="Klient" />
+                        <TableColumn fx:id="colStatus" minWidth="0.0" prefWidth="412.800048828125" text="Status" />
                     </columns>
                   </TableView>
                </children>
             </VBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="200.0">
+               <children>
+                  <BorderPane layoutX="91.0" layoutY="10.0" prefHeight="26.0" prefWidth="21.0" />
+                  <Label text="id " />
+                  <TextField fx:id="orderIDField" editable="false" prefHeight="26.0" prefWidth="70.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Klient " />
+                  <TextField fx:id="clientField" layoutX="81.0" layoutY="10.0" />
+                  <BorderPane layoutX="231.0" layoutY="10.0" prefHeight="30.0" prefWidth="8.0" />
+                  <Label layoutX="256.0" layoutY="10.0" text="zbieracz " />
+                  <TextField fx:id="userIDField" layoutX="328.0" layoutY="10.0" prefHeight="26.0" prefWidth="90.0" />
+                  <BorderPane layoutX="320.0" layoutY="10.0" prefHeight="30.0" prefWidth="8.0" />
+                  <Label layoutX="328.0" layoutY="10.0" text="Status " />
+                  <TextField fx:id="statusField" layoutX="374.0" layoutY="10.0" prefHeight="26.0" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="251.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label text="1. " />
+                  <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="16.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="part Nr. " />
+                  <TextField fx:id="part1Field" layoutX="81.0" layoutY="10.0" />
+                  <BorderPane layoutX="231.0" layoutY="10.0" prefHeight="30.0" prefWidth="88.0" />
+                  <Label layoutX="256.0" layoutY="10.0" text="ilość " />
+                  <TextField fx:id="quantity1Field" layoutX="328.0" layoutY="10.0" prefHeight="26.0" prefWidth="90.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="36.0" />
+                  <Label text="part ID " />
+                  <TextField fx:id="partID1Field" prefHeight="26.0" prefWidth="120.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="393.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label text="2. " />
+                  <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="16.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="part Nr. " />
+                  <TextField fx:id="part2Field" layoutX="81.0" layoutY="10.0" />
+                  <BorderPane layoutX="231.0" layoutY="10.0" prefHeight="30.0" prefWidth="88.0" />
+                  <Label layoutX="256.0" layoutY="10.0" text="ilość " />
+                  <TextField fx:id="quantity2Field" layoutX="328.0" layoutY="10.0" prefHeight="26.0" prefWidth="90.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="36.0" />
+                  <Label text="part ID " />
+                  <TextField fx:id="partID2Field" prefHeight="26.0" prefWidth="120.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="424.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label text="3. " />
+                  <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="16.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="part Nr. " />
+                  <TextField fx:id="part3Field" layoutX="81.0" layoutY="10.0" />
+                  <BorderPane layoutX="231.0" layoutY="10.0" prefHeight="30.0" prefWidth="88.0" />
+                  <Label layoutX="256.0" layoutY="10.0" text="ilość " />
+                  <TextField fx:id="quantity3Field" layoutX="328.0" layoutY="10.0" prefHeight="26.0" prefWidth="90.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="36.0" />
+                  <Label text="part ID " />
+                  <TextField fx:id="partID3Field" prefHeight="26.0" prefWidth="120.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="342.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label text="4. " />
+                  <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="16.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="part Nr. " />
+                  <TextField fx:id="part4Field" layoutX="81.0" layoutY="10.0" />
+                  <BorderPane layoutX="231.0" layoutY="10.0" prefHeight="30.0" prefWidth="88.0" />
+                  <Label layoutX="256.0" layoutY="10.0" text="ilość " />
+                  <TextField fx:id="quantity4Field" layoutX="328.0" layoutY="10.0" prefHeight="26.0" prefWidth="90.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="36.0" />
+                  <Label text="part ID " />
+                  <TextField fx:id="partID4Field" prefHeight="26.0" prefWidth="120.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="448.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label text="5." />
+                  <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="16.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="part Nr. " />
+                  <TextField fx:id="part5Field" layoutX="81.0" layoutY="10.0" />
+                  <BorderPane layoutX="231.0" layoutY="10.0" prefHeight="30.0" prefWidth="88.0" />
+                  <Label layoutX="256.0" layoutY="10.0" text="ilość " />
+                  <TextField fx:id="quantity5Field" layoutX="328.0" layoutY="10.0" prefHeight="26.0" prefWidth="90.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="36.0" />
+                  <Label text="part ID " />
+                  <TextField fx:id="partID5Field" prefHeight="26.0" prefWidth="120.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="478.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label text="6." />
+                  <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="16.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="part Nr. " />
+                  <TextField fx:id="part6Field" layoutX="81.0" layoutY="10.0" />
+                  <BorderPane layoutX="231.0" layoutY="10.0" prefHeight="30.0" prefWidth="88.0" />
+                  <Label layoutX="256.0" layoutY="10.0" text="ilość " />
+                  <TextField fx:id="quantity6Field" layoutX="328.0" layoutY="10.0" prefHeight="26.0" prefWidth="90.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="36.0" />
+                  <Label text="part ID " />
+                  <TextField fx:id="partID6Field" prefHeight="26.0" prefWidth="120.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="433.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label text="7." />
+                  <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="16.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="part Nr. " />
+                  <TextField fx:id="part7Field" layoutX="81.0" layoutY="10.0" />
+                  <BorderPane layoutX="231.0" layoutY="10.0" prefHeight="30.0" prefWidth="88.0" />
+                  <Label layoutX="256.0" layoutY="10.0" text="ilość " />
+                  <TextField fx:id="quantity7Field" layoutX="328.0" layoutY="10.0" prefHeight="26.0" prefWidth="90.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="36.0" />
+                  <Label text="part ID " />
+                  <TextField fx:id="partID7Field" prefHeight="26.0" prefWidth="120.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="539.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label text="8." />
+                  <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="16.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="part Nr. " />
+                  <TextField fx:id="part8Field" layoutX="81.0" layoutY="10.0" />
+                  <BorderPane layoutX="231.0" layoutY="10.0" prefHeight="30.0" prefWidth="88.0" />
+                  <Label layoutX="256.0" layoutY="10.0" text="ilość " />
+                  <TextField fx:id="quantity8Field" layoutX="328.0" layoutY="10.0" prefHeight="26.0" prefWidth="90.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="36.0" />
+                  <Label text="part ID " />
+                  <TextField fx:id="partID8Field" prefHeight="26.0" prefWidth="120.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="424.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label text="9." />
+                  <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="16.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="part Nr. " />
+                  <TextField fx:id="part9Field" layoutX="81.0" layoutY="10.0" />
+                  <BorderPane layoutX="231.0" layoutY="10.0" prefHeight="30.0" prefWidth="88.0" />
+                  <Label layoutX="256.0" layoutY="10.0" text="ilość " />
+                  <TextField fx:id="quantity9Field" layoutX="328.0" layoutY="10.0" prefHeight="26.0" prefWidth="90.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="36.0" />
+                  <Label text="part ID " />
+                  <TextField fx:id="partID9Field" prefHeight="26.0" prefWidth="120.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="530.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label text="10." />
+                  <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="16.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="8.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="part Nr. " />
+                  <TextField fx:id="part10Field" layoutX="81.0" layoutY="10.0" />
+                  <BorderPane layoutX="231.0" layoutY="10.0" prefHeight="30.0" prefWidth="88.0" />
+                  <Label layoutX="256.0" layoutY="10.0" text="ilość " />
+                  <TextField fx:id="quantity10Field" layoutX="328.0" layoutY="10.0" prefHeight="26.0" prefWidth="90.0" />
+                  <BorderPane prefHeight="30.0" prefWidth="36.0" />
+                  <Label text="part ID " />
+                  <TextField fx:id="partID10Field" prefHeight="26.0" prefWidth="120.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="35.0" prefWidth="800.0">
                <children>
                   <Button fx:id="saveBut" mnemonicParsing="false" onAction="#savebutAction" text="Zapisz zmiany">
                      <font>
@@ -44,7 +221,7 @@
                   </Button>
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="320.0" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="320.0" prefHeight="35.0" prefWidth="800.0">
                <children>
                   <Button fx:id="menuBut" mnemonicParsing="false" onAction="#menubutAction" text="Menu">
                      <font>

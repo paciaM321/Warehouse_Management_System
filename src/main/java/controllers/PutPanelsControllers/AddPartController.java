@@ -54,7 +54,7 @@ public class AddPartController {
             // Hibernate uzupełnił ID, więc możemy je wyświetlić
             partID.setText(String.valueOf(newPart.getId()));
 
-            PauseTransition pause = new PauseTransition(Duration.seconds(1.75));
+            PauseTransition pause = new PauseTransition(Duration.seconds(4));
             pause.setOnFinished(event2 -> clearFields());
             pause.play();
 

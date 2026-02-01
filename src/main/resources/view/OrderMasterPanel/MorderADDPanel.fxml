@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MasterPanelsControllers.MasterAddController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.OrderPanelsControllers.OrderAddController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -29,14 +28,14 @@
                <children>
                   <BorderPane prefHeight="46.0" prefWidth="69.0" />
                   <Label text="Zamawiający:" />
-                  <TextField>
+                  <TextField fx:id="clientField">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
                   <BorderPane prefHeight="46.0" prefWidth="52.0" />
                   <Label layoutX="72.0" layoutY="24.0" text="przydziel pracownikowi" />
-                  <TextField layoutX="143.0" layoutY="18.0">
+                  <TextField fx:id="userIDField" layoutX="143.0" layoutY="18.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -50,14 +49,14 @@
                   <Label layoutX="74.0" layoutY="21.0" text="1." />
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="32.0" />
                   <Label text="Part nr. :" />
-                  <TextField>
+                  <TextField fx:id="part1Field">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
                   <BorderPane prefHeight="82.0" prefWidth="150.0" />
                   <Label layoutX="10.0" layoutY="52.0" text="ilość:" />
-                  <TextField layoutX="80.0" layoutY="45.0">
+                  <TextField fx:id="quantity1Field" layoutX="80.0" layoutY="45.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -71,14 +70,14 @@
                   <Label layoutX="74.0" layoutY="21.0" text="2." />
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="32.0" />
                   <Label text="Part nr. :" />
-                  <TextField>
+                  <TextField fx:id="part2Field">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
                   <BorderPane prefHeight="82.0" prefWidth="150.0" />
                   <Label layoutX="10.0" layoutY="52.0" text="ilość:" />
-                  <TextField layoutX="80.0" layoutY="45.0">
+                  <TextField fx:id="quantity2Field" layoutX="80.0" layoutY="45.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -92,14 +91,14 @@
                   <Label layoutX="74.0" layoutY="21.0" text="3." />
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="32.0" />
                   <Label text="Part nr. :" />
-                  <TextField>
+                  <TextField fx:id="part3Field">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
                   <BorderPane prefHeight="82.0" prefWidth="150.0" />
                   <Label layoutX="10.0" layoutY="52.0" text="ilość:" />
-                  <TextField layoutX="80.0" layoutY="45.0">
+                  <TextField fx:id="quantity3Field" layoutX="80.0" layoutY="45.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -113,14 +112,14 @@
                   <Label layoutX="74.0" layoutY="21.0" text="4." />
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="32.0" />
                   <Label text="Part nr. :" />
-                  <TextField>
+                  <TextField fx:id="part4Field">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
                   <BorderPane prefHeight="82.0" prefWidth="150.0" />
                   <Label layoutX="10.0" layoutY="52.0" text="ilość:" />
-                  <TextField layoutX="80.0" layoutY="45.0">
+                  <TextField fx:id="quantity4Field" layoutX="80.0" layoutY="45.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -134,14 +133,14 @@
                   <Label layoutX="74.0" layoutY="21.0" text="5." />
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="32.0" />
                   <Label text="Part nr. :" />
-                  <TextField>
+                  <TextField fx:id="part5Field">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
                   <BorderPane prefHeight="82.0" prefWidth="150.0" />
                   <Label layoutX="10.0" layoutY="52.0" text="ilość:" />
-                  <TextField layoutX="80.0" layoutY="45.0">
+                  <TextField fx:id="quantity5Field" layoutX="80.0" layoutY="45.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -155,14 +154,14 @@
                   <Label layoutX="74.0" layoutY="21.0" text="6." />
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="32.0" />
                   <Label text="Part nr. :" />
-                  <TextField>
+                  <TextField fx:id="part6Field">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
                   <BorderPane prefHeight="82.0" prefWidth="150.0" />
                   <Label layoutX="10.0" layoutY="52.0" text="ilość:" />
-                  <TextField layoutX="80.0" layoutY="45.0">
+                  <TextField fx:id="quantity6Field" layoutX="80.0" layoutY="45.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -176,14 +175,14 @@
                   <Label layoutX="74.0" layoutY="21.0" text="7." />
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="32.0" />
                   <Label text="Part nr. :" />
-                  <TextField>
+                  <TextField fx:id="part7Field">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
                   <BorderPane prefHeight="82.0" prefWidth="150.0" />
                   <Label layoutX="10.0" layoutY="52.0" text="ilość:" />
-                  <TextField layoutX="80.0" layoutY="45.0">
+                  <TextField fx:id="quantity7Field" layoutX="80.0" layoutY="45.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -197,14 +196,14 @@
                   <Label layoutX="74.0" layoutY="21.0" text="8." />
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="32.0" />
                   <Label text="Part nr. :" />
-                  <TextField>
+                  <TextField fx:id="part8Field">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
                   <BorderPane prefHeight="82.0" prefWidth="150.0" />
                   <Label layoutX="10.0" layoutY="52.0" text="ilość:" />
-                  <TextField layoutX="80.0" layoutY="45.0">
+                  <TextField fx:id="quantity8Field" layoutX="80.0" layoutY="45.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -218,14 +217,14 @@
                   <Label layoutX="74.0" layoutY="21.0" text="9." />
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="32.0" />
                   <Label text="Part nr. :" />
-                  <TextField>
+                  <TextField fx:id="part9Field">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
                   <BorderPane prefHeight="82.0" prefWidth="150.0" />
                   <Label layoutX="10.0" layoutY="52.0" text="ilość:" />
-                  <TextField layoutX="80.0" layoutY="45.0">
+                  <TextField fx:id="quantity9Field" layoutX="80.0" layoutY="45.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -239,14 +238,14 @@
                   <Label layoutX="74.0" layoutY="21.0" text="10." />
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="25.0" />
                   <Label text="Part nr. :" />
-                  <TextField>
+                  <TextField fx:id="part10Field">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
                   <BorderPane prefHeight="82.0" prefWidth="150.0" />
                   <Label layoutX="10.0" layoutY="52.0" text="ilość:" />
-                  <TextField layoutX="80.0" layoutY="45.0">
+                  <TextField fx:id="quantity10Field" layoutX="80.0" layoutY="45.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -261,6 +260,12 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
+                  <BorderPane prefHeight="30.0" prefWidth="79.0" />
+                  <Label fx:id="orderIDLabel" text="zamowienie nr.:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
             <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="501.0" prefHeight="40.0" prefWidth="200.0">

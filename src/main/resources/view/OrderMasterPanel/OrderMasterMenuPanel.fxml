@@ -36,7 +36,7 @@
                      </font>
                   </Button>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" />
-                  <Button fx:id="OrderlistBut" mnemonicParsing="false" onAction="#orderlistAction" text="zbierz zamowienia">
+                  <Button fx:id="orderlistBut" mnemonicParsing="false" onAction="#orderlistAction" text="zbierz zamowienia">
                      <font>
                         <Font size="14.0" />
                      </font>

@@ -60,7 +60,7 @@ public class MenuOrderController {
 
     public void orderlistAction(ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/OrderMasterPanel/OrderListPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/OrderMasterPanel/OrdersListPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("orders");

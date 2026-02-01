@@ -17,7 +17,7 @@
             <BorderPane prefHeight="40.0" prefWidth="800.0" />
             <HBox alignment="TOP_CENTER" prefHeight="35.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="20.0" prefWidth="47.0" text="Orders">
+                  <Label prefHeight="20.0" prefWidth="114.0" text="Zamówienia">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -26,16 +26,27 @@
             </HBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="ordersTable" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="colID" prefWidth="75.0" text="ID zamówienia" />
+                      <TableColumn fx:id="colClient" prefWidth="210.39996337890625" text="Klient" />
+                        <TableColumn fx:id="colDate" prefWidth="177.60003662109375" text="Data" />
+                        <TableColumn fx:id="colStatus" prefWidth="336.79998779296875" text="Status" />
                     </columns>
                   </TableView>
                </children>
             </VBox>
             <BorderPane prefHeight="20.0" prefWidth="200.0" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="saveBut" mnemonicParsing="false" onAction="#saveAction" text="zatwiedź">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="305.0" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button fx:id="menuBut" mnemonicParsing="false" onAction="#menubutAction" text="Menu">
                      <font>
