@@ -223,7 +223,14 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="320.0" prefHeight="35.0" prefWidth="800.0">
                <children>
+                  <BorderPane layoutX="365.0" layoutY="10.0" prefHeight="35.0" prefWidth="41.0" />
                   <Button fx:id="menuBut" mnemonicParsing="false" onAction="#menubutAction" text="Menu">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <BorderPane prefHeight="35.0" prefWidth="108.0" />
+                  <Button fx:id="adminMenuBut" layoutX="348.0" layoutY="13.0" mnemonicParsing="false" onAction="#AdminMenuAction" text="Admin menu">
                      <font>
                         <Font size="14.0" />
                      </font>

@@ -16,11 +16,13 @@ public class AdminPanelController {
     @FXML
     private Button delBut;
     @FXML
-    private Button editPlaceinfBut;
+    private Button editOrderBut;
+    @FXML
+    private Button editPartBut;
     @FXML
     private Button editUserinfBut;
     @FXML
-    private Button menuBut;
+    private Button logoutBut;
 
     public void addbutAction(ActionEvent event) throws Exception {
         try {
@@ -59,17 +61,37 @@ public class AdminPanelController {
                 e.printStackTrace();
             }
         }
-            public void editPlaceinfoButAction (ActionEvent event) throws Exception {
+    public void editOrderAction (ActionEvent event) throws Exception {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/OrderMasterPanel/MorderEditPanel.fxml"));
+
+            Stage stage = new Stage();
+            stage.setTitle("EditOrderPanel");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+
+            Stage mainStage = (Stage) editOrderBut.getScene().getWindow();
+            mainStage.hide();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+            public void editPartAction (ActionEvent event) throws Exception {
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("/view/AdminPanels/EditPlacePanel.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/view/PutMasterPanels/EditPartPanel.fxml"));
 
                 Stage stage = new Stage();
-                stage.setTitle("EditPlacePanel");
+                stage.setTitle("EditPartPanel");
                 stage.setScene(new Scene(root));
                 stage.show();
 
 
-                Stage mainStage = (Stage) editPlaceinfBut.getScene().getWindow();
+                Stage mainStage = (Stage) editPartBut.getScene().getWindow();
                 mainStage.hide();
 
 
@@ -95,9 +117,9 @@ public class AdminPanelController {
                         e.printStackTrace();
                     }
                 }
-    public void menubutAction (ActionEvent event) throws Exception {
+    public void logoutAction (ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/menuPanel.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/WorkersPanels/LoginPanel.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("MenuPanel");
@@ -105,7 +127,7 @@ public class AdminPanelController {
             stage.show();
 
 
-            Stage mainStage = (Stage) menuBut.getScene().getWindow();
+            Stage mainStage = (Stage) logoutBut.getScene().getWindow();
             mainStage.hide();
 
 

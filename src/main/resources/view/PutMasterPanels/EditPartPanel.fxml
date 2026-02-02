@@ -97,6 +97,12 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
+                  <BorderPane prefHeight="99.0" prefWidth="82.0" />
+                  <Button fx:id="adminMenuBut" layoutX="283.0" layoutY="45.0" mnemonicParsing="false" onAction="#AdminMenuAction" text="Admin menu">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </HBox>
          </children>

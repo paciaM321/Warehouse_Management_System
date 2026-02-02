@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminPanelsControllers.AdminAddPanelController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -25,23 +25,24 @@
             </HBox>
             <HBox prefHeight="55.0" prefWidth="200.0">
                <children>
+                  <BorderPane layoutX="249.0" layoutY="10.0" prefHeight="55.0" prefWidth="5.0" />
                   <Label text="Login">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField promptText="logIn">
+                  <TextField fx:id="loginField" promptText="logIn">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <BorderPane prefHeight="40.0" prefWidth="200.0" />
+                  <BorderPane prefHeight="55.0" prefWidth="150.0" />
                   <Label layoutX="10.0" layoutY="10.0" text="Haslo">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="38.0" layoutY="10.0" promptText="********">
+                  <TextField fx:id="paswField" layoutX="38.0" layoutY="10.0" promptText="********">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -56,49 +57,25 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField promptText="logIn">
+                  <TextField fx:id="nameField" promptText="logIn">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <BorderPane prefHeight="55.0" prefWidth="174.0" />
+                  <BorderPane prefHeight="55.0" prefWidth="144.0" />
                   <Label layoutX="10.0" layoutY="10.0" text="Nazwisko">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="38.0" layoutY="10.0" promptText="********">
+                  <TextField fx:id="lastnameField" layoutX="38.0" layoutY="10.0" promptText="********">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
                </children>
             </HBox>
-            <HBox layoutX="10.0" layoutY="176.0" prefHeight="55.0" prefWidth="200.0">
-               <children>
-                  <Label text="Data Urodzenia">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField promptText="logIn">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </TextField>
-                  <BorderPane prefHeight="55.0" prefWidth="140.0" />
-                  <Label layoutX="10.0" layoutY="10.0" text="Rola">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField layoutX="38.0" layoutY="10.0" promptText="********">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
+           
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Button fx:id="saveBut" mnemonicParsing="false" onAction="#savebutAction" text="zapisz">

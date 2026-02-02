@@ -22,7 +22,7 @@
                   </Label>
                </children>
             </HBox>
-            <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="100.0">
+            <VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="100.0">
                <children>
                   <Button fx:id="addBut" mnemonicParsing="false" onAction="#addbutAction" text="dodaj użytkownika ">
                      <font>
@@ -36,19 +36,25 @@
                      </font>
                   </Button>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" />
-                  <Button fx:id="editPlaceinfBut" layoutX="384.0" layoutY="10.0" mnemonicParsing="false" onAction="#editPlaceinfoButAction" text="Edit Miejsce(usuńprodukt)">
+                  <Button fx:id="editOrderBut" layoutX="384.0" layoutY="10.0" mnemonicParsing="false" onAction="#editOrderAction" text="Edytuj zamówienie(Order)">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
                   <BorderPane layoutX="10.0" layoutY="110.0" prefHeight="200.0" prefWidth="200.0" />
+                  <Button fx:id="editPartBut" layoutX="320.0" layoutY="130.0" mnemonicParsing="false" onAction="#editPartAction" text="Edytuj informacje Przedmiocie">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <BorderPane layoutX="10.0" layoutY="148.0" prefHeight="200.0" prefWidth="200.0" />
                   <Button fx:id="editUserinfBut" layoutX="384.0" layoutY="10.0" mnemonicParsing="false" onAction="#editUserbutAction" text="Edytuj Informacje o Użytkowniku">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
                   <BorderPane layoutX="10.0" layoutY="183.0" prefHeight="200.0" prefWidth="200.0" />
-                  <Button fx:id="menuBut" layoutX="300.0" layoutY="160.0" mnemonicParsing="false" onAction="#menubutAction" text="Menu">
+                  <Button fx:id="logoutBut" layoutX="300.0" layoutY="160.0" mnemonicParsing="false" onAction="#logoutAction" text="Wyloguj">
                      <font>
                         <Font size="14.0" />
                      </font>

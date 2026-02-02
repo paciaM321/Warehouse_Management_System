@@ -46,7 +46,7 @@ public class OrdersListController {
     @FXML private TableColumn<Order, Integer> colID;
     @FXML private TableColumn<Order, String> colClient, colStatus, colDate;
 
-    // Załóżmy, że przechowujesz ID zalogowanego usera np. w statycznym polu
+  //  Przechowwywanie zalogowaniego uzytkownika
     public static int loggedInUserId = 1;
 
     @FXML
@@ -70,7 +70,7 @@ public class OrdersListController {
 
     private void startPickingProcess(Order order) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // Pobieramy listę przedmiotów (OrderList) dla tego zamówienia
+            // Pobieramy listę przedmiotów (OrderList) dla tego zamowienia
             Query<OrderList> query = session.createQuery("FROM OrderList WHERE orderId = :oId", OrderList.class);
             query.setParameter("oId", order.getId());
             List<OrderList> items = query.list();
@@ -116,11 +116,11 @@ public class OrdersListController {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
 
-            // 1. Aktualizacja postępu w zamówieniu (tabela order_items)
+            // Aktualizacja postępu w zamówieniu (tabela order_items)
             item.setSubmit(item.getQuantity());
             session.update(item);
 
-            // 2. Logika aktualizacji stanu magazynowego (tabela parts)
+            // Logika aktualizacji stanu magazynowego (tabela parts)
             long newStockQty = part.getQuantity() - item.getQuantity();
 
             if (newStockQty <= 0) {
@@ -164,7 +164,7 @@ public class OrdersListController {
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
-        alert.setHeaderText(null); // Opcjonalne: usuwa domyślny nagłówek dla czystszego wyglądu
+        alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
     }

@@ -4,20 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30caa984-c0c0-4475-9f97-1a15982668a6" name="Changes" comment="changed views, navigations, add controllers, changed models,dao.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrderEditController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrderListDTO.java" afterDir="false" />
+    <list default="true" id="30caa984-c0c0-4475-9f97-1a15982668a6" name="Changes" comment="changed views, edit controllers.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/MasterPanelsControllers/MasterAddController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrderAddController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/MenuOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/MenuOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminAddPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminAddPanelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminDelUserPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminDelUserPanelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminEditPlaceController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminPanelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/EditLocationPanelController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/EditUserPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/EditUserPanelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/MasterPanelsControllers/MasterEditController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/MasterPanelsControllers/MasterMenuController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrderEditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrderEditController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrdersListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrdersListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PutPanelsControllers/AddPartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/PutPanelsControllers/AddPartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/MorderADDPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/MorderADDPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/WorkersPanelsControllers/MenuController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/WorkersPanelsControllers/OrderListController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/WorkersPanelsControllers/RelockController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/AddUserPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/AddUserPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/AdminPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/AdminPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/DelleteUserPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/DelleteUserPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/EditInfoPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/EditInfoPanel.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/MorderEditPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/MorderEditPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/OrderMasterMenuPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/OrderMasterMenuPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/OrdersListPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/OrdersListPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/PutMasterPanels/EditPartPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/PutMasterPanels/EditPartPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/WorkersPanels/EditLocationPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/WorkersPanels/OrrderListPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/WorkersPanels/RelockPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/WorkersPanels/menuPanel.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769880073751</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="changed views, edit controllers.">
+      <option name="closed" value="true" />
+      <created>1769984148989</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1769984148989</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -209,6 +229,7 @@
     <MESSAGE value="add views + kontrollers + models+DAO" />
     <MESSAGE value="add views + kontrollers + models" />
     <MESSAGE value="changed views, navigations, add controllers, changed models,dao." />
-    <option name="LAST_COMMIT_MESSAGE" value="changed views, navigations, add controllers, changed models,dao." />
+    <MESSAGE value="changed views, edit controllers." />
+    <option name="LAST_COMMIT_MESSAGE" value="changed views, edit controllers." />
   </component>
 </project>

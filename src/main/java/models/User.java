@@ -1,9 +1,12 @@
 package models;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+
 
 @Entity
 @Table(name = "users")
+
 public class User {
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +16,9 @@ public class User {
  private String password;
  private String role;
 
+ @Column(name = "created_at", nullable = false, updatable = false)
+ private Timestamp createdAt;
+
  @Column(name = "first_name")
  private String firstName;
 
@@ -21,12 +27,13 @@ public class User {
 
  public User() {}
 
- public User(String login, String password, String role, String firstName, String lastName) {
+ public User(String login, String password, String role, String firstName, String lastName, Timestamp createdAt) {
   this.login = login;
   this.password = password;
   this.role = role;
   this.firstName = firstName;
   this.lastName = lastName;
+  this.createdAt =createdAt;
  }
 
  // Gettery i Settery
@@ -42,6 +49,7 @@ public class User {
  public void setPassword(String password) { this.password = password; }
  public void setRole(String role) { this.role = role; }
  public void setFirstName(String firstName) { this.firstName = firstName; }
-
+ public Timestamp getCreatedAt() {return createdAt; }
+ public void setCreatedAt(Timestamp createdAt) {this.createdAt = createdAt; }
 
 }

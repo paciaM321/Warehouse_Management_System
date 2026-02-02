@@ -28,10 +28,15 @@
                 </HBox>
                 <HBox prefHeight="250.0" prefWidth="200.0">
                     <children>
-                        <TableView fx:id="UserTable" prefHeight="100.0" prefWidth="800.0">
+                        <TableView fx:id="UsersTable" prefHeight="100.0" prefWidth="800.0">
                             <columns>
-                                <TableColumn prefWidth="75.0" text="C1" />
-                                <TableColumn prefWidth="75.0" text="C2" />
+                                <TableColumn fx:id="colUserID" prefWidth="75.0" text="USER ID " />
+                                <TableColumn fx:id="colName" prefWidth="75.0" text="Imie" />
+                        <TableColumn fx:id="colLastname" prefWidth="75.0" text="Nazwisko" />
+                        <TableColumn fx:id="colRole" prefWidth="93.59991455078125" text="Rola" />
+                        <TableColumn fx:id="colLogin" prefWidth="119.2000732421875" text="Login" />
+                        <TableColumn fx:id="colpasw" prefWidth="119.199951171875" text="Hasło" />
+                        <TableColumn fx:id="colCreatedAt" prefWidth="244.0" text="Created_at" />
                             </columns>
                         </TableView>
                     </children>
