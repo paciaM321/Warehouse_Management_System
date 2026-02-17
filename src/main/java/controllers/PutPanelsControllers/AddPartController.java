@@ -1,68 +1,89 @@
 package controllers.PutPanelsControllers;
+
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 import models.Part;
 import database.PartDAO;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddPartController {
-    @FXML
-    private Button addBut;
-    @FXML
-    private Button menuBut;
-    @FXML
-    private TextField partNameField;
-    @FXML
-    private TextField partNrField;
-    @FXML
-    private TextField quantityField;
-    @FXML
-    private Label partID;
+    @FXML private Button addBut, menuBut;
+    @FXML private TextField partNameField, partNrField, quantityField;
+    @FXML private Label partID;
 
-
-
-
-    // Wewnątrz AddPartController
     private PartDAO partDAO = new PartDAO();
 
     @FXML
     public void AddPartToStorage(ActionEvent event) {
+        StringBuilder errorMessages = new StringBuilder();
+
+        //  Pobranie i trimowanie danych (usuwamy zbędne spacje)
+        String inputPName = partNameField.getText().trim();
+        String inputPNr = partNrField.getText().trim();
+        String quantityStr = quantityField.getText().trim();
+
+        //  Walidacja pustych elementów
+        if (inputPName.isEmpty()) {
+            errorMessages.append("- Nazwa produktu nie może być pusta.\n");
+        }
+        if (inputPNr.isEmpty()) {
+            errorMessages.append("- Numer produktu (Part Nr) nie może być pusty.\n");
+        }
+
+        //  Walidacja ilościowa
+        long inputQuantity = 0;
+        if (quantityStr.isEmpty()) {
+            errorMessages.append("- Pole 'ilość' nie może być puste.\n");
+        } else {
+            try {
+                inputQuantity = Long.parseLong(quantityStr);
+                if (inputQuantity <= 0) {
+                    errorMessages.append("- Ilość musi być większa od zera.\n");
+                }
+            } catch (NumberFormatException e) {
+                errorMessages.append("- Ilość musi być poprawną liczbą całkowitą.\n");
+            }
+        }
+
+        //  Sprawdzenie, czy są błędy
+        if (errorMessages.length() > 0) {
+            showAlert("Błąd walidacji", errorMessages.toString());
+            return;
+        }
+
+        //  Zapis do bazy danych, jeśli walidacja przeszła pomyślnie
         try {
-            String inputPName = partNameField.getText();
-            String inputPNr = partNrField.getText();
-            long inputQuantity = Long.parseLong(quantityField.getText());
-
-            // Tworzymy obiekt (status ustawiony w konstruktorze na "PROCESSING")
             Part newPart = new Part(inputPNr, inputPName, inputQuantity);
-
-            // Zapisujemy do bazy przez Hibernate
             partDAO.savePart(newPart);
 
-            // Hibernate uzupełnił ID, więc możemy je wyświetlić
-            partID.setText(String.valueOf(newPart.getId()));
+            partID.setText("Zapisano! ID: " + newPart.getId());
+            partID.setStyle("-fx-text-fill: green;");
 
-            PauseTransition pause = new PauseTransition(Duration.seconds(4));
+            // Automatyczne czyszczenie po sukcesie
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
             pause.setOnFinished(event2 -> clearFields());
             pause.play();
 
-            System.out.println("Zapisano w DB! ID: " + newPart.getId() + ", Status: " + newPart.getStatus());
-
-        } catch (NumberFormatException e) {
-            partID.setText("Błąd: Niepoprawna ilość!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Błąd bazy danych", "Nie udało się zapisać produktu. Spróbuj ponownie.");
         }
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     private void clearFields() {
@@ -70,22 +91,15 @@ public class AddPartController {
         partNrField.clear();
         quantityField.clear();
         partID.setText("");
+        partID.setStyle("-fx-text-fill: black;");
     }
 
-    public void menubutAction(ActionEvent event) throws Exception {
+    @FXML
+    public void menubutAction(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/PutMasterPanels/PutMenuPanel.fxml"));
-
-            Stage stage = new Stage();
-            stage.setTitle("menu");
+            Stage stage = (Stage) menuBut.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.show();
-
-
-            Stage mainStage=(Stage) menuBut.getScene().getWindow();
-            mainStage.hide();
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }

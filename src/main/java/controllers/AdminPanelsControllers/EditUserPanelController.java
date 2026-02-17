@@ -23,7 +23,7 @@ import java.util.List;
 public class EditUserPanelController {
     @FXML private TableView<User> usersTable;
     @FXML private TableColumn<User, Integer> colUserID;
-    @FXML private TableColumn<User, String> colName, colName1, colRole, colLogin, colPasw;
+    @FXML private TableColumn<User, String> colName, colName1, colRole;
     @FXML private TableColumn<User, Timestamp> colCreatedAt;
 
     @FXML private TextField loginField, paswfield, nameField, LastnameField, roleField;
@@ -33,13 +33,10 @@ public class EditUserPanelController {
 
     @FXML
     public void initialize() {
-        //  Konfiguracja kolumn
         colUserID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         colName1.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
-        colLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
-        colPasw.setCellValueFactory(new PropertyValueFactory<>("password"));
         colCreatedAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
 
         loadUsers();

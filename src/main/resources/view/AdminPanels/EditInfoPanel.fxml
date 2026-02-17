@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminPanelsControllers.EditUserPanelController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminPanelsControllers.EditUserPanelController">
     <children>
         <VBox prefHeight="200.0" prefWidth="100.0">
             <children>
@@ -31,12 +31,10 @@
                   <TableView fx:id="usersTable" prefHeight="100.0" prefWidth="800.0">
                     <columns>
                       <TableColumn fx:id="colUserID" prefWidth="63.0" text="USER ID" />
-                      <TableColumn fx:id="colName" prefWidth="87.0" text="Imie" />
-                        <TableColumn fx:id="colName1" prefWidth="105.0" text="Nazwisko" />
-                        <TableColumn fx:id="colRole" prefWidth="60.0" text="Rola" />
-                        <TableColumn fx:id="colLogin" prefWidth="134.0" text="Login" />
-                        <TableColumn fx:id="colPasw" prefWidth="171.0" text="Hasło" />
-                        <TableColumn fx:id="colCreatedAt" prefWidth="179.0" text="Created At " />
+                      <TableColumn fx:id="colName" prefWidth="173.0" text="Imie" />
+                        <TableColumn fx:id="colName1" prefWidth="192.0" text="Nazwisko" />
+                        <TableColumn fx:id="colRole" prefWidth="153.0" text="Rola" />
+                        <TableColumn fx:id="colCreatedAt" prefWidth="218.0" text="Created At " />
                     </columns>
                   </TableView>
                </children>

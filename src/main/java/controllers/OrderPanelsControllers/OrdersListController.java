@@ -1,53 +1,36 @@
 package controllers.OrderPanelsControllers;
 
+import controllers.LoginController;
+import database.HibernateUtil;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import models.Order;
 import models.OrderList;
 import models.Part;
-
-import database.HibernateUtil;
-import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import javafx.scene.control.Button;
-
-
-
 
 public class OrdersListController {
-    @FXML
-    private Button menuBut;
-
-    @FXML
-    private Button saveBut;
-
-    public void saveAction(){
-        Order selected = ordersTable.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            startPickingProcess(selected);
-            refreshTable(); // Używamy nowej metody bezpiecznego odświeżania
-        } else {
-            showAlert("Błąd", "Najpierw wybierz zamówienie z tabeli!");
-        }
-    }
-
+    @FXML private Button menuBut, saveBut;
     @FXML private TableView<Order> ordersTable;
     @FXML private TableColumn<Order, Integer> colID;
     @FXML private TableColumn<Order, String> colClient, colStatus, colDate;
 
-  //  Przechowwywanie zalogowaniego uzytkownika
-    public static int loggedInUserId = 1;
+    // Pobieramy ID zalogowanego użytkownika
+    private int loggedInUserId = LoginController.loggedUser.getId();
 
     @FXML
     public void initialize() {
@@ -57,11 +40,21 @@ public class OrdersListController {
         colDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
 
         loadUserOrders();
+    }
 
+    @FXML
+    public void saveAction() {
+        Order selected = ordersTable.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            startPickingProcess(selected);
+        } else {
+            showAlert("Błąd", "Najpierw wybierz zamówienie z tabeli!");
+        }
     }
 
     private void loadUserOrders() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // Pokazujemy zamówienia przypisane do pracownika, które są w toku
             Query<Order> query = session.createQuery("FROM Order WHERE userId = :uId AND status = 'INPROGRESS'", Order.class);
             query.setParameter("uId", loggedInUserId);
             ordersTable.setItems(FXCollections.observableArrayList(query.list()));
@@ -70,38 +63,95 @@ public class OrdersListController {
 
     private void startPickingProcess(Order order) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // Pobieramy listę przedmiotów (OrderList) dla tego zamowienia
-            Query<OrderList> query = session.createQuery("FROM OrderList WHERE orderId = :oId", OrderList.class);
+            // Pobieramy tylko te pozycje, które nie zostały jeszcze zebrane (submit < quantity)
+            Query<OrderList> query = session.createQuery("FROM OrderList WHERE orderId = :oId AND submit < quantity", OrderList.class);
             query.setParameter("oId", order.getId());
-            List<OrderList> items = query.list();
+            List<OrderList> itemsToPick = query.list();
 
-            for (OrderList item : items) {
-                // Dla każdego przedmiotu pobieramy dane z tabeli Part (lokalizacja, nazwa)
+            if (itemsToPick.isEmpty()) {
+                showAlert("Info", "Wszystkie produkty z tego zamówienia są już zebrane.");
+                checkAndFinalizeOrder(order.getId());
+                return;
+            }
+
+            boolean processInterrupted = false;
+
+            for (OrderList item : itemsToPick) {
                 Part part = session.get(Part.class, item.getPartId());
                 if (part == null) continue;
 
-                boolean pickingDone = showPickingAlert(part, item.getQuantity());
+                // Alert prowadzący magazyniera po lokalizacjach
+                boolean picked = showPickingAlert(part, item.getQuantity());
 
-                if (pickingDone) {
-                    executeDatabaseUpdate(item, part);
+                if (picked) {
+                    confirmItemPick(item.getId()); // Potwierdzamy zbiórkę w bazie
                 } else {
-                    // Jeśli pracownik kliknie Anuluj, przerywamy proces dla reszty listy
+                    // Jeśli kliknie ANULUJ - przerywamy pętlę (zawieszamy)
+                    processInterrupted = true;
                     break;
                 }
             }
 
-            // Po zakończeniu wszystkich alertów zmieniamy status zamówienia
-            updateOrderStatus(order.getId(), "PACKED");
-            loadUserOrders(); // Odśwież listę
+            if (processInterrupted) {
+                // Specjalny komunikat przy przerwaniu
+                showAlert("ZAMÓWIENIE ZAWIESZONE", "Proces zbierania przerwany. Skontaktuj się z przełożonym!");
+            } else {
+                // 4. Jeśli przeszliśmy przez wszystko bez przerw - sprawdzamy finał
+                checkAndFinalizeOrder(order.getId());
+            }
+
+            refreshTable();
+        }
+    }
+
+    private void confirmItemPick(int orderListId) {
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            OrderList item = session.get(OrderList.class, orderListId);
+            if (item != null) {
+                // Ustawiamy submit na quantity - to oznacza "fizycznie pobrane z półki"
+                item.setSubmit(item.getQuantity());
+                session.update(item);
+            }
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    private void checkAndFinalizeOrder(int orderId) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // Sprawdzamy czy w tym zamówieniu zostało COKOLWIEK do zebrania
+            Query<Long> query = session.createQuery("SELECT count(id) FROM OrderList WHERE orderId = :oId AND submit < quantity", Long.class);
+            query.setParameter("oId", orderId);
+
+            if (query.uniqueResult() == 0) {
+                updateOrderStatus(orderId, "PACKED");
+                showAlert("UKOŃCZONO", "Zamówienie skompletowane! Proszę złożyć produkty do wysyłki.");
+            }
+        }
+    }
+
+    private void updateOrderStatus(int orderId, String newStatus) {
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            Order order = session.get(Order.class, orderId);
+            if (order != null) {
+                order.setStatus(newStatus);
+                session.update(order);
+            }
+            tx.commit();
         }
     }
 
     private boolean showPickingAlert(Part part, int qtyToPick) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Zbiórka towaru");
-        alert.setHeaderText("Idź do lokalizacji: " + part.getLocation());
-        alert.setContentText("Przedmiot: " + part.getName() + " [" + part.getPartNr() + "]\n" +
-                "Ilość do pobrania: " + qtyToPick);
+        alert.setHeaderText("IDŹ DO: " + (part.getLocation() != null ? part.getLocation() : "BRAK LOKALIZACJI"));
+        alert.setContentText("Przedmiot: " + part.getName() + "\nNr: " + part.getPartNr() + "\nIlość: " + qtyToPick);
 
         ButtonType buttonSubmit = new ButtonType("Zatwierdź (Submit)");
         ButtonType buttonCancel = new ButtonType("Anuluj", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -111,51 +161,8 @@ public class OrdersListController {
         return result.isPresent() && result.get() == buttonSubmit;
     }
 
-    private void executeDatabaseUpdate(OrderList item, Part part) {
-        Transaction tx = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            tx = session.beginTransaction();
-
-            // Aktualizacja postępu w zamówieniu (tabela order_items)
-            item.setSubmit(item.getQuantity());
-            session.update(item);
-
-            // Logika aktualizacji stanu magazynowego (tabela parts)
-            long newStockQty = part.getQuantity() - item.getQuantity();
-
-            if (newStockQty <= 0) {
-                // Zgodnie z prośbą: zamiast usuwania, czyścimy dane
-                part.setQuantity(0);             // Zerujemy ilość
-                part.setStatus("OUT_OF_STOCK");  // Zmiana statusu na brak towaru
-                part.setLocation(null);          // Zerujemy lokalizację (null pozwoli uniknąć błędów przy UNIQUE)
-            } else {
-                part.setQuantity(newStockQty);
-            }
-
-            // Używamy update, co zachowuje integralność klucza obcego
-            session.update(part);
-
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) tx.rollback();
-            e.printStackTrace();
-        }
-    }
-
-    private void updateOrderStatus(int orderId, String newStatus) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction tx = session.beginTransaction();
-            Order order = session.get(Order.class, orderId);
-            if (order != null) {
-                order.setStatus(newStatus);
-                session.update(order);
-            }
-            tx.commit();
-        }
-    }
     private void refreshTable() {
-        javafx.application.Platform.runLater(() -> {
-            // Czyścimy zaznaczenie, aby JavaFX nie szukał starego indeksu
+        Platform.runLater(() -> {
             ordersTable.getSelectionModel().clearSelection();
             loadUserOrders();
         });
@@ -169,22 +176,12 @@ public class OrdersListController {
         alert.showAndWait();
     }
 
-    public void menubutAction (ActionEvent event) throws Exception {
+    @FXML
+    public void menubutAction(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/OrderMasterPanel/OrderMasterMenuPanel.fxml"));
-
-            Stage stage = new Stage();
-            stage.setTitle("MenuPanel");
+            Stage stage = (Stage) menuBut.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.show();
-
-
-            Stage mainStage = (Stage) menuBut.getScene().getWindow();
-            mainStage.hide();
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) { e.printStackTrace(); }
     }
 }

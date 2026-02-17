@@ -23,6 +23,9 @@ public class AdminPanelController {
     private Button editUserinfBut;
     @FXML
     private Button logoutBut;
+    @FXML
+    private Button listBut;
+
 
     public void addbutAction(ActionEvent event) throws Exception {
         try {
@@ -79,6 +82,27 @@ public class AdminPanelController {
             e.printStackTrace();
         }
     }
+
+    public void listAction(ActionEvent event) throws Exception {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/AdminPanels/PartsPanel.fxml"));
+
+            Stage stage = new Stage();
+            stage.setTitle("AddUserPanel");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+
+            Stage mainStage = (Stage) listBut.getScene().getWindow();
+            mainStage.hide();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
             public void editPartAction (ActionEvent event) throws Exception {

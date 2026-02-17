@@ -39,7 +39,7 @@ public class AdminAddPanelController {
         StringBuilder errorMessages = new StringBuilder();
 
                                                             //.*\\d.*  ---- [0-9]
-        // Walidacja Imienia i Nazwiska (brak cyfr)
+        // Walidacja imienia i nazwiska (brak cyfr)
         if (firstName.isEmpty()) {
             errorMessages.append("- Imię nie może być puste.\n");
         } else if (firstName.matches(".*\\d.*")) {
@@ -52,12 +52,12 @@ public class AdminAddPanelController {
             errorMessages.append("- Nazwisko nie może zawierać cyfr.\n");
         }
 
-        // Walidacja Loginu (> 3 znaki)
+        // Walidacja loginu (> 3 znaki)
         if (login.length() <= 3) {
             errorMessages.append("- Login musi być dłuższy niż 3 znaki.\n");
         }
 
-        // Walidacja Hasła (5+ znaków, 1 wielka litera, 1 cyfra)
+        // Walidacja hasła (5+ znaków, 1 wielka litera, 1 cyfra)
         if (password.length() < 5) {
             errorMessages.append("- Hasło musi mieć co najmniej 5 znaków.\n");
         }
@@ -68,12 +68,12 @@ public class AdminAddPanelController {
             errorMessages.append("- Hasło musi zawierać co najmniej jedną cyfrę.\n");
         }
 
-        // Walidacja Roli
+        // Walidacja roli
         if (role == null) {
             errorMessages.append("- Musisz wybrać rolę (PUT, ORDER lub ADMIN).\n");
         }
 
-        // Wyświetlenie błędów, jeśli wystąpiły
+        // Wyświetlenie błędow, jeśli wystąpiły
         if (errorMessages.length() > 0) {
             showAlert("Błąd walidacji", errorMessages.toString());
             return;

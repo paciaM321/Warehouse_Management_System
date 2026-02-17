@@ -17,7 +17,6 @@ import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderAddController {
@@ -26,48 +25,81 @@ public class OrderAddController {
     @FXML private Label orderIDLabel;
     @FXML private Button menuBut;
 
-    // Listy pól tekstowych dla łatwiejszej obsługi w pętli
     @FXML private TextField part1Field, part2Field, part3Field, part4Field, part5Field, part6Field, part7Field, part8Field, part9Field, part10Field;
     @FXML private TextField quantity1Field, quantity2Field, quantity3Field, quantity4Field, quantity5Field, quantity6Field, quantity7Field, quantity8Field, quantity9Field, quantity10Field;
 
     @FXML
     public void savebutAction(ActionEvent event) {
-        String client = clientField.getText();
-        String workerIdStr = userIDField.getText();
+        StringBuilder errors = new StringBuilder();
+        String client = clientField.getText().trim();
+        String workerIdStr = userIDField.getText().trim();
 
-        if (client.isEmpty() || workerIdStr.isEmpty()) {
-            showAlert("Błąd", "Podaj klienta i ID pracownika!");
+        //  Walidacja nagłówka
+        if (client.isEmpty()) errors.append("- Nazwa firmy nie może być pusta.\n");
+        if (workerIdStr.isEmpty()) errors.append("- ID pracownika nie może być puste.\n");
+
+        //  Walidacja produktów
+        TextField[] partFields = {part1Field, part2Field, part3Field, part4Field, part5Field, part6Field, part7Field, part8Field, part9Field, part10Field};
+        TextField[] qtyFields = {quantity1Field, quantity2Field, quantity3Field, quantity4Field, quantity5Field, quantity6Field, quantity7Field, quantity8Field, quantity9Field, quantity10Field};
+
+        boolean hasAtLeastOneItem = false;
+        for (int i = 0; i < partFields.length; i++) {
+            String partNr = partFields[i].getText().trim();
+            String qtyStr = qtyFields[i].getText().trim();
+
+            if (!partNr.isEmpty() || !qtyStr.isEmpty()) {
+                if (partNr.isEmpty() || qtyStr.isEmpty()) {
+                    errors.append("- Pozycja ").append(i + 1).append(": Podaj numer części i ilość.\n");
+                } else {
+                    try {
+                        int qty = Integer.parseInt(qtyStr);
+                        if (qty <= 0) errors.append("- Pozycja ").append(i + 1).append(": Ilość musi być > 0.\n");
+                        else hasAtLeastOneItem = true;
+                    } catch (NumberFormatException e) {
+                        errors.append("- Pozycja ").append(i + 1).append(": Ilość musi być liczbą.\n");
+                    }
+                }
+            }
+        }
+
+        if (!hasAtLeastOneItem) errors.append("- Dodaj co najmniej jeden produkt do zamówienia.\n");
+
+        if (errors.length() > 0) {
+            showAlert("Błąd walidacji", errors.toString());
             return;
         }
 
+        //  Bezpieczny zapis Hibernate (bez try-with-resources dla sesji)
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try {
             tx = session.beginTransaction();
 
-            // 1. Tworzenie zamówienia ze statusem "INPROGRESS"
             Order newOrder = new Order();
             newOrder.setClient(client);
             newOrder.setUserId(Integer.parseInt(workerIdStr));
             newOrder.setOrderDate(new Timestamp(System.currentTimeMillis()));
-            newOrder.setStatus("INPROGRESS"); // Zmieniono z NEW na INPROGRESS
+            newOrder.setStatus("INPROGRESS");
 
             session.save(newOrder);
-
-            // 2. Inteligentne zapisywanie przedmiotów (z obsługą wielu lokalizacji)
             allocateItems(session, newOrder.getId());
 
             tx.commit();
             orderIDLabel.setText("Zamówienie nr: " + newOrder.getId());
-            showAlert("Sukces", "Zamówienie INPROGRESS zapisane!");
+            showAlert("Sukces", "Zamówienie zapisane!");
             clearAllFields();
 
         } catch (Exception e) {
-            if (tx != null && tx.getStatus().canRollback()) tx.rollback();
+            // TERAZ ROLLBACK ZADZIAŁA, BO SESJA JEST OTWARTA
+            if (tx != null) tx.rollback();
             e.printStackTrace();
-            showAlert("Błąd", "Błąd alokacji! Sprawdź czy masz dość towaru w magazynie.");
+            showAlert("Błąd", "Brak towaru lub błąd bazy: " + e.getMessage());
+        } finally {
+            session.close(); // Zamykamy sesję ręcznie na samym końcu
         }
     }
 
+    // ... fragment metody allocateItems w OrderAddController ...
     private void allocateItems(Session session, int orderId) {
         TextField[] partFields = {part1Field, part2Field, part3Field, part4Field, part5Field, part6Field, part7Field, part8Field, part9Field, part10Field};
         TextField[] qtyFields = {quantity1Field, quantity2Field, quantity3Field, quantity4Field, quantity5Field, quantity6Field, quantity7Field, quantity8Field, quantity9Field, quantity10Field};
@@ -79,44 +111,55 @@ public class OrderAddController {
             if (!partNr.isEmpty() && !qtyStr.isEmpty()) {
                 int remainingToAllocate = Integer.parseInt(qtyStr);
 
-                // Pobieramy wszystkie partie tego produktu, które mają stan > 0, sortując po ilości (od największej)
-                Query<Part> query = session.createQuery("FROM Part WHERE partNr = :nr AND quantity > 0 ORDER BY quantity DESC", Part.class);
+                // Pobieramy dostępne sztuki (status PUTTED lub RETURNED)
+                Query<Part> query = session.createQuery("FROM Part WHERE partNr = :nr AND quantity > 0 AND (status = 'PUTTED' OR status = 'RETURNED') ORDER BY quantity DESC", Part.class);
                 query.setParameter("nr", partNr);
                 List<Part> availableStocks = query.list();
 
                 for (Part stock : availableStocks) {
                     if (remainingToAllocate <= 0) break;
 
-                    // Ile możemy wziąć z tej konkretnej lokalizacji (ID)?
                     int take = (int) Math.min(stock.getQuantity(), remainingToAllocate);
 
+                    // TWORZYMY POZYCJĘ ZAMÓWIENIA
                     OrderList item = new OrderList();
                     item.setOrderId(orderId);
-                    item.setPartId(stock.getId()); // Zapisujemy konkretne ID lokalizacji
+                    item.setPartId(stock.getId());
                     item.setQuantity(take);
-                    item.setSubmit(0);
+                    item.setSubmit(0); // Jeszcze nie zebrane
                     session.save(item);
+
+                    // REZERWACJA: Odejmujemy ze stanu głównego od razu
+                    stock.setQuantity(stock.getQuantity() - take);
+                    if (stock.getQuantity() == 0) {
+                        stock.setStatus("OUT_OF_STOCK");
+                    }
+                    session.update(stock);
 
                     remainingToAllocate -= take;
                 }
 
                 if (remainingToAllocate > 0) {
-                    throw new RuntimeException("Brak wystarczającej ilości towaru: " + partNr);
+                    throw new RuntimeException("Brak towaru na magazynie dla numeru: " + partNr);
                 }
             }
         }
     }
 
     private void clearAllFields() {
-        clientField.clear(); userIDField.clear();
-        // Można dodać pętlę czyszczącą wszystkie 20 TextFieldów
+        clientField.clear();
+        userIDField.clear();
+        TextField[] allFields = {
+                part1Field, part2Field, part3Field, part4Field, part5Field, part6Field, part7Field, part8Field, part9Field, part10Field,
+                quantity1Field, quantity2Field, quantity3Field, quantity4Field, quantity5Field, quantity6Field, quantity7Field, quantity8Field, quantity9Field, quantity10Field
+        };
+        for (TextField field : allFields) { if (field != null) field.clear(); }
     }
 
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setContentText(content);
-        alert.showAndWait();
+        alert.setTitle(title); alert.setHeaderText(null);
+        alert.setContentText(content); alert.showAndWait();
     }
 
     @FXML
@@ -125,7 +168,6 @@ public class OrderAddController {
             Parent root = FXMLLoader.load(getClass().getResource("/view/OrderMasterPanel/OrderMasterMenuPanel.fxml"));
             Stage stage = (Stage) menuBut.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.show();
         } catch (IOException e) { e.printStackTrace(); }
     }
 }

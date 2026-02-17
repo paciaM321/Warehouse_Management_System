@@ -25,6 +25,8 @@ public class LoginController {
     @FXML private Button loginBut;
     @FXML private Label messageLabel;
 
+    public static User loggedUser;
+
     public User validateLogin(String login, String password) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             String hql = "FROM User WHERE login = :login AND password = :password";
@@ -65,12 +67,11 @@ public class LoginController {
 
     private void loginNextPage(User user) {
         try {
+            loggedUser = user;
             String fxmlPath = "";
             String title = "";
             String role = user.getRole().toUpperCase();
-
-            // PRZYPISANIE ID DO KONTROLERA ZBIERANIA ZAMÓWIEŃ
-            OrdersListController.loggedInUserId = user.getId();
+            loggedUser = user;
 
             switch (role) {
                 case "ADMIN":

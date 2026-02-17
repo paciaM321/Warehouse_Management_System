@@ -1,9 +1,11 @@
 package controllers.OrderPanelsControllers;
 
+import controllers.LoginController;
 import database.HibernateUtil;
 import models.Order;
 import models.OrderList;
 import models.Part;
+import models.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,7 +36,7 @@ public class OrderEditController {
     @FXML private TextField partID1Field, partID2Field, partID3Field, partID4Field, partID5Field, partID6Field, partID7Field, partID8Field, partID9Field, partID10Field;
 
     @FXML private Button menuBut, saveBut;
-
+    @FXML private Button adminMenuBut;
     @FXML
     public void initialize() {
         // Mapowanie kolumn tabeli
@@ -42,10 +44,18 @@ public class OrderEditController {
         colClient.setCellValueFactory(new PropertyValueFactory<>("client"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        // Ładowanie zamówień (status != PACKED)
+        // Zarządzanie widocznością przycisków (bez setManaged)
+        if ("ADMIN".equalsIgnoreCase(LoginController.loggedUser.getRole())) {
+            adminMenuBut.setVisible(true);
+            menuBut.setVisible(false);
+        } else {
+            adminMenuBut.setVisible(false);
+            menuBut.setVisible(true);
+        }
+
+        // Ładowanie zamówień i listener wyboru
         loadOrders();
 
-        // Listener wyboru wiersza
         ordersTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 fillFields(newVal);
@@ -108,43 +118,85 @@ public class OrderEditController {
     public void savebutAction(ActionEvent event) {
         String orderIdStr = orderIDField.getText();
         if (orderIdStr.isEmpty()) {
-            showAlert("Błąd", "Wybierz zamówienie do edycji!");
+            showAlert("Błąd", "Najpierw wybierz zamówienie z tabeli do edycji!");
             return;
         }
 
+        //  Walidacja danych nagłówkowych
+        StringBuilder errors = new StringBuilder();
+        String client = clientField.getText().trim();
+        String userIdStr = userIDField.getText().trim();
+        String status = statusField.getText().trim().toUpperCase();
+
+        if (client.isEmpty()) errors.append("- Nazwa klienta nie może być pusta.\n");
+        if (userIdStr.isEmpty()) errors.append("- ID pracownika nie może być puste.\n");
+        if (status.isEmpty()) errors.append("- Status zamówienia nie może być pusty.\n");
+
+        //  Wstępna walidacja pozycji (ilości)
+        TextField[] nrFields = {part1Field, part2Field, part3Field, part4Field, part5Field, part6Field, part7Field, part8Field, part9Field, part10Field};
+        TextField[] qtyFields = {quantity1Field, quantity2Field, quantity3Field, quantity4Field, quantity5Field, quantity6Field, quantity7Field, quantity8Field, quantity9Field, quantity10Field};
+
+        for (int i = 0; i < 10; i++) {
+            String pNr = nrFields[i].getText().trim();
+            String qStr = qtyFields[i].getText().trim();
+
+            if (!pNr.isEmpty() && qStr.isEmpty()) {
+                errors.append("- Pozycja ").append(i + 1).append(": Podaj ilość dla produktu ").append(pNr).append(".\n");
+            } else if (!qStr.isEmpty()) {
+                try {
+                    int q = Integer.parseInt(qStr);
+                    if (q < 0) errors.append("- Pozycja ").append(i + 1).append(": Ilość nie może być ujemna.\n");
+                } catch (NumberFormatException e) {
+                    errors.append("- Pozycja ").append(i + 1).append(": Ilość musi być liczbą całkowitą.\n");
+                }
+            }
+        }
+
+        if (errors.length() > 0) {
+            showAlert("Błąd walidacji", errors.toString());
+            return;
+        }
+
+        //  Zapis do bazy
         int orderId = Integer.parseInt(orderIdStr);
         Transaction tx = null;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
 
-            //  Aktualizacja danych głównych zamówienia (Order)
             Order orderToUpdate = session.get(Order.class, orderId);
             if (orderToUpdate != null) {
-                orderToUpdate.setClient(clientField.getText());
-                orderToUpdate.setUserId(Integer.parseInt(userIDField.getText()));
-                orderToUpdate.setStatus(statusField.getText().toUpperCase());
+                orderToUpdate.setClient(client);
+                orderToUpdate.setUserId(Integer.parseInt(userIdStr));
+                orderToUpdate.setStatus(status);
                 session.update(orderToUpdate);
             }
 
-            //  Aktualizacja pozycji zamówienia (OrderList / order_items)
             updateOrderItems(session, orderId);
 
             tx.commit();
             showAlert("Sukces", "Zmiany w zamówieniu nr " + orderId + " zostały zapisane.");
 
-            // Odświeżenie tabeli i pól
+            //  Pełne czyszczenie i odświeżenie
             loadOrders();
-            clearPartFields();
-            orderIDField.clear();
+            clearAllFormFields();
 
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
-            showAlert("Błąd", "Nie udało się zapisać zmian. Sprawdź poprawność danych (np. ID pracownika).");
+            showAlert("Błąd", "Nie udało się zapisać zmian. Sprawdź czy ID pracownika istnieje.");
         }
     }
 
+    // Nowa metoda czyszcząca absolutnie wszystko
+    private void clearAllFormFields() {
+        orderIDField.clear();
+        clientField.clear();
+        userIDField.clear();
+        statusField.clear();
+        clearPartFields(); // Czyści 30 pól pozycji (ID, Nr, Qty)
+        ordersTable.getSelectionModel().clearSelection();
+    }
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -193,6 +245,29 @@ public class OrderEditController {
                         session.save(newItem);
                     }
                 }
+            }
+        }
+    }
+
+    @FXML
+    public void AdminMenuAction() {
+        User currentUser = LoginController.loggedUser;
+        if (currentUser != null && "ADMIN".equalsIgnoreCase(currentUser.getRole())) {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/view/AdminPanels/AdminPanel.fxml"));
+
+                Stage stage = new Stage();
+                stage.setTitle("menu");
+                stage.setScene(new Scene(root));
+                stage.show();
+
+
+                Stage mainStage = (Stage) adminMenuBut.getScene().getWindow();
+                mainStage.hide();
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

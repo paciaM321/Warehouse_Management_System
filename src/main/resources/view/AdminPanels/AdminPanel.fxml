@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminPanelsControllers.AdminPanelController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminPanelsControllers.AdminPanelController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -22,7 +22,7 @@
                   </Label>
                </children>
             </HBox>
-            <VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="100.0">
+            <VBox alignment="TOP_CENTER" prefHeight="348.0" prefWidth="800.0">
                <children>
                   <Button fx:id="addBut" mnemonicParsing="false" onAction="#addbutAction" text="dodaj użytkownika ">
                      <font>
@@ -48,6 +48,12 @@
                      </font>
                   </Button>
                   <BorderPane layoutX="10.0" layoutY="148.0" prefHeight="200.0" prefWidth="200.0" />
+                  <Button fx:id="listBut" layoutX="341.0" layoutY="10.0" mnemonicParsing="false" onAction="#listAction" text="Lista Przedmiotów">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <BorderPane layoutX="10.0" layoutY="282.0" prefHeight="200.0" prefWidth="200.0" />
                   <Button fx:id="editUserinfBut" layoutX="384.0" layoutY="10.0" mnemonicParsing="false" onAction="#editUserbutAction" text="Edytuj Informacje o Użytkowniku">
                      <font>
                         <Font size="14.0" />

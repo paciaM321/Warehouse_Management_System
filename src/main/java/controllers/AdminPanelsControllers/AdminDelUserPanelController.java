@@ -24,7 +24,7 @@ public class AdminDelUserPanelController {
 
     @FXML private TableView<User> UsersTable;
     @FXML private TableColumn<User, Integer> colUserID;
-    @FXML private TableColumn<User, String> colName, colLastname, colRole, colLogin, colpasw;
+    @FXML private TableColumn<User, String> colName, colLastname, colRole;
     @FXML private TableColumn<User, Timestamp> colCreatedAt;
 
     @FXML private TextField User_id;
@@ -37,8 +37,6 @@ public class AdminDelUserPanelController {
         colName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         colLastname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
-        colLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
-        colpasw.setCellValueFactory(new PropertyValueFactory<>("password"));
         colCreatedAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
 
         //   Załadowanie danych do tabeli
