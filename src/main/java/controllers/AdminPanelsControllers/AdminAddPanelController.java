@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 
 public class AdminAddPanelController {
     @FXML private TextField loginField, paswField, nameField, lastnameField;
-    @FXML private ComboBox<String> roleBox; // Nasz nowy ComboBox
+    @FXML private ComboBox<String> roleBox;
     @FXML private Button saveBut, adminmenuBut;
 
     @FXML
