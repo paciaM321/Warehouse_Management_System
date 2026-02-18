@@ -4,244 +4,65 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30caa984-c0c0-4475-9f97-1a15982668a6" name="Changes" comment="changed views, edit controllers.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/PartListControllers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/PartsPanel.fxml" afterDir="false" />
+    <list default="true" id="a7c9d3d8-60f8-4635-9848-f2e651ed1b98" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminAddPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminAddPanelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminDelUserPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminDelUserPanelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/AdminPanelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/EditUserPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminPanelsControllers/EditUserPanelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrderAddController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrderAddController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrderEditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrderEditController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrderListDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrdersListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/OrderPanelsControllers/OrdersListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PutPanelsControllers/AddPartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/PutPanelsControllers/AddPartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PutPanelsControllers/EditPartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/PutPanelsControllers/EditPartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PutPanelsControllers/PutPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/PutPanelsControllers/PutPanelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/AddUserPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/AddUserPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/AdminPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/AdminPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/DelleteUserPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/DelleteUserPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/EditInfoPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/EditInfoPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AdminPanels/EditPlacePanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/WorkersPanels/EditPlacePanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/MorderADDPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/MorderADDPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/MorderEditPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/MorderEditPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/OrderMasterMenuPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/OrderMasterMenuPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/OrdersListPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/OrderMasterPanel/OrdersListPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/PutMasterPanels/AddPartPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/PutMasterPanels/AddPartPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/PutMasterPanels/EditPartPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/PutMasterPanels/EditPartPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/PutMasterPanels/PutMenuPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/PutMasterPanels/PutMenuPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/PutMasterPanels/putPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/PutMasterPanels/putPanel.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="package-info" />
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 2
-}</component>
-  <component name="ProjectId" id="37wbvxlXgLxn38XkwuW9D6sUc7n" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="39qpzQ6ITdtU2s8LoNQo9ONEn1h" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.DatabaseTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Filip/IdeaProjects/system_zarzadzania_magazynem/system_zarzadania_magazynem/pom.xml",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Filip\IdeaProjects\system_zarzadzania_magazynem\system_zarzadania_magazynem\src\main\resources\view\WorkersPanels" />
-      <recent name="C:\Users\Filip\IdeaProjects\system_zarzadzania_magazynem\system_zarzadania_magazynem\src\main\resources\view\OrderMasterPanel" />
-      <recent name="C:\Users\Filip\IdeaProjects\system_zarzadzania_magazynem\system_zarzadania_magazynem\src\main\resources\view\PutMasterPanels" />
-      <recent name="C:\Users\Filip\IdeaProjects\system_zarzadzania_magazynem\system_zarzadania_magazynem\src\main\resources\view\AdminPanels" />
-      <recent name="C:\Users\Filip\IdeaProjects\system_zarzadzania_magazynem\system_zarzadania_magazynem\src\main\java" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="" />
-    </key>
-  </component>
+}]]></component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+    <configuration default="true" type="JetRunConfigurationType">
       <module name="system_zarzadania_magazynem" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="system_zarzadania_magazynem" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="30caa984-c0c0-4475-9f97-1a15982668a6" name="Changes" comment="" />
-      <created>1767817319596</created>
+      <changelist id="a7c9d3d8-60f8-4635-9848-f2e651ed1b98" name="Changes" comment="" />
+      <created>1771433716873</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1767817319596</updated>
+      <updated>1771433716873</updated>
     </task>
-    <task id="LOCAL-00001" summary="utworzenie widoków">
-      <option name="closed" value="true" />
-      <created>1767922915280</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1767922915280</updated>
-    </task>
-    <task id="LOCAL-00002" summary="utworzenie widoków">
-      <option name="closed" value="true" />
-      <created>1767980363349</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1767980363349</updated>
-    </task>
-    <task id="LOCAL-00003" summary="utworzenie widoków">
-      <option name="closed" value="true" />
-      <created>1767980701473</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1767980701473</updated>
-    </task>
-    <task id="LOCAL-00004" summary="utworzenie widoków">
-      <option name="closed" value="true" />
-      <created>1767982955181</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1767982955181</updated>
-    </task>
-    <task id="LOCAL-00005" summary="dodanie nowych widoków oraz nowych kontrolerów">
-      <option name="closed" value="true" />
-      <created>1768013994178</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1768013994178</updated>
-    </task>
-    <task id="LOCAL-00006" summary="dodanie nowych widoków oraz ich kontrolerów">
-      <option name="closed" value="true" />
-      <created>1768016450068</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1768016450068</updated>
-    </task>
-    <task id="LOCAL-00007" summary="add views + kontrollers + models">
-      <option name="closed" value="true" />
-      <created>1768349368190</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1768349368190</updated>
-    </task>
-    <task id="LOCAL-00008" summary="add views + kontrollers + models">
-      <option name="closed" value="true" />
-      <created>1768350257136</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1768350257137</updated>
-    </task>
-    <task id="LOCAL-00009" summary="add views + kontrollers + models">
-      <option name="closed" value="true" />
-      <created>1769120945383</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1769120945383</updated>
-    </task>
-    <task id="LOCAL-00010" summary="add views + kontrollers + models">
-      <option name="closed" value="true" />
-      <created>1769120987039</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1769120987039</updated>
-    </task>
-    <task id="LOCAL-00011" summary="changed views, navigations, add controllers, changed models,dao.">
-      <option name="closed" value="true" />
-      <created>1769880073751</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1769880073751</updated>
-    </task>
-    <task id="LOCAL-00012" summary="changed views, edit controllers.">
-      <option name="closed" value="true" />
-      <created>1769984148989</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1769984148989</updated>
-    </task>
-    <task id="LOCAL-00013" summary="changed views, edit controllers.">
-      <option name="closed" value="true" />
-      <created>1770065112368</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1770065112368</updated>
-    </task>
-    <option name="localTasksCounter" value="14" />
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="utworzenie widoków" />
-    <MESSAGE value="dodanie nowych widoków oraz nowych kontrolerów" />
-    <MESSAGE value="dodanie nowych widoków oraz ich kontrolerów" />
-    <MESSAGE value="add views + kontrollers + models+DAO" />
-    <MESSAGE value="add views + kontrollers + models" />
-    <MESSAGE value="changed views, navigations, add controllers, changed models,dao." />
-    <MESSAGE value="changed views, edit controllers." />
-    <option name="LAST_COMMIT_MESSAGE" value="changed views, edit controllers." />
   </component>
 </project>
