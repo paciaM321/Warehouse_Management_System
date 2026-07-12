@@ -86,10 +86,10 @@ public class AdminAddPanelController {
 
             User newUser = new User();
             newUser.setLogin(login);
-            newUser.setPassword(password);
+            newUser.setPassword(org.mindrot.jbcrypt.BCrypt.hashpw(password, org.mindrot.jbcrypt.BCrypt.gensalt()));
             newUser.setFirstName(firstName);
             newUser.setLastName(lastName);
-            newUser.setRole(role);
+            newUser.setRole(models.UserRole.valueOf(role.toUpperCase()));
             newUser.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
             session.save(newUser);

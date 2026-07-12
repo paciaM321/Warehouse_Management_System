@@ -79,9 +79,10 @@ public class AdminDelUserPanelController {
 
             if (user != null) {
                 // Sprawdzenie roli - bezpieczeństwo
-                if ("ADMIN".equalsIgnoreCase(user.getRole())) {
+                if (models.UserRole.ADMIN == user.getRole()) {
                     showAlert("Ostrzeżenie", "Usuwanie administratorów wymaga dodatkowych uprawnień.");
-                    // Możesz tu przerwać lub pozwolić, zależnie od logiki systemu
+                    tx.rollback();
+                    return;
                 }
 
                 session.delete(user);

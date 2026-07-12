@@ -1,55 +1,48 @@
 package models;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-
 @Entity
 @Table(name = "users")
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
- @Id
- @GeneratedValue(strategy = GenerationType.IDENTITY)
- private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
- private String login;
- private String password;
- private String role;
+    @Column(unique = true, nullable = false)
+    private String login;
 
- @Column(name = "created_at", nullable = false, updatable = false)
- private Timestamp createdAt;
+    @Column(nullable = false)
+    private String password;
 
- @Column(name = "first_name")
- private String firstName;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserRole role;
 
- @Column(name = "last_name")
- private String lastName;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Timestamp createdAt;
 
- public User() {}
+    @Column(name = "first_name")
+    private String firstName;
 
- public User(String login, String password, String role, String firstName, String lastName, Timestamp createdAt) {
-  this.login = login;
-  this.password = password;
-  this.role = role;
-  this.firstName = firstName;
-  this.lastName = lastName;
-  this.createdAt =createdAt;
- }
+    @Column(name = "last_name")
+    private String lastName;
 
- // Gettery i Settery
- public int getId() { return id; }
- public String getLogin() { return login; }
- public String getPassword() { return password; }
- public String getRole() { return role; }
- public String getFirstName() { return firstName; }
- public String getLastName() { return lastName; }
- public void setLastName(String lastName) { this.lastName = lastName; }
- public void setId(int id) { this.id = id; }
- public void setLogin(String login) { this.login = login; }
- public void setPassword(String password) { this.password = password; }
- public void setRole(String role) { this.role = role; }
- public void setFirstName(String firstName) { this.firstName = firstName; }
- public Timestamp getCreatedAt() {return createdAt; }
- public void setCreatedAt(Timestamp createdAt) {this.createdAt = createdAt; }
-
+    public User(String login, String password, UserRole role, String firstName, String lastName, Timestamp createdAt) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.createdAt = createdAt;
+    }
 }

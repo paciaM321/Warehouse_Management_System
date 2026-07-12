@@ -1,0 +1,40 @@
+/* Główne tło okna - jasnoszare */
+.root {
+    -fx-background-color: #dcdcdc;
+}
+
+/* Styl przycisków - błękitne tło */
+.button {
+    -fx-background-color: #87B3F5;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+/* Efekt po najechaniu dla lepszej responsywności */
+.button:hover {
+    -fx-background-color: #76a2e4; /* Nieco ciemniejszy błękit */
+}
+
+/* Pola tekstowe i ComboBoxy - białe tło */
+.text-field, .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #b5b5b5;
+    -fx-border-radius: 2px;
+}
+
+/* Specjalny styl dla statusLabel (Ciemnoniebieski tekst) */
+.label-status {
+    -fx-text-fill: #00008b; /* DARKBLUE */
+    -fx-font-weight: bold;
+}
+
+/* Tabela - zachowanie standardowego wyglądu z obrazka */
+.table-view {
+    -fx-background-color: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: #f0f0f0;
+}

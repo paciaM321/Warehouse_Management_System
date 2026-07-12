@@ -55,7 +55,7 @@ public class OrdersListController {
     private void loadUserOrders() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Pokazujemy zamówienia przypisane do pracownika, które są w toku
-            Query<Order> query = session.createQuery("FROM Order WHERE userId = :uId AND status = 'INPROGRESS'", Order.class);
+            Query<Order> query = session.createQuery("FROM Order WHERE user.id = :uId AND status = models.OrderStatus.INPROGRESS", Order.class);
             query.setParameter("uId", loggedInUserId);
             ordersTable.setItems(FXCollections.observableArrayList(query.list()));
         }
@@ -64,7 +64,7 @@ public class OrdersListController {
     private void startPickingProcess(Order order) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Pobieramy tylko te pozycje, które nie zostały jeszcze zebrane (submit < quantity)
-            Query<OrderList> query = session.createQuery("FROM OrderList WHERE orderId = :oId AND submit < quantity", OrderList.class);
+            Query<OrderList> query = session.createQuery("FROM OrderList WHERE order.id = :oId AND submit < quantity", OrderList.class);
             query.setParameter("oId", order.getId());
             List<OrderList> itemsToPick = query.list();
 
@@ -113,6 +113,13 @@ public class OrdersListController {
                 // Ustawiamy submit na quantity - to oznacza "fizycznie pobrane z półki"
                 item.setSubmit(item.getQuantity());
                 session.update(item);
+
+                // Zwalniamy lokalizację jeśli część jest OUT_OF_STOCK
+                Part part = item.getPart();
+                if (part != null && part.getQuantity() == 0) {
+                    part.setLocation(null);
+                    session.update(part);
+                }
             }
             tx.commit();
         } catch (Exception e) {
@@ -124,17 +131,17 @@ public class OrdersListController {
     private void checkAndFinalizeOrder(int orderId) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Sprawdzamy czy w tym zamówieniu zostało COKOLWIEK do zebrania
-            Query<Long> query = session.createQuery("SELECT count(id) FROM OrderList WHERE orderId = :oId AND submit < quantity", Long.class);
+            Query<Long> query = session.createQuery("SELECT count(id) FROM OrderList WHERE order.id = :oId AND submit < quantity", Long.class);
             query.setParameter("oId", orderId);
 
             if (query.uniqueResult() == 0) {
-                updateOrderStatus(orderId, "PACKED");
+                updateOrderStatus(orderId, models.OrderStatus.PACKED);
                 showAlert("UKOŃCZONO", "Zamówienie skompletowane! Proszę złożyć produkty do wysyłki.");
             }
         }
     }
 
-    private void updateOrderStatus(int orderId, String newStatus) {
+    private void updateOrderStatus(int orderId, models.OrderStatus newStatus) {
         Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
@@ -144,6 +151,9 @@ public class OrdersListController {
                 session.update(order);
             }
             tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
         }
     }
 

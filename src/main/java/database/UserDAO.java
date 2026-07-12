@@ -7,6 +7,10 @@ import org.hibernate.SessionFactory;
 public class UserDAO {
     private SessionFactory sessionFactory;
 
+    public UserDAO() {
+        this.sessionFactory = HibernateUtil.getSessionFactory();
+    }
+
     public UserDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

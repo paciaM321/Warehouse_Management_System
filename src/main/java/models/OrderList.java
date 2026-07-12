@@ -1,46 +1,48 @@
 package models;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "order_items")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "order_id")
-    private int orderId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
 
-    @Column(name = "part_id")
-    private int partId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "part_id", nullable = false)
+    private Part part;
 
+    @Column(nullable = false)
     private int quantity;
+
+    @Column(nullable = false)
     private int submit;
 
-    public OrderList() {}
-
-    public OrderList(int orderId, int partId, int quantity) {
-        this.orderId = orderId;
-        this.partId = partId;
+    public OrderList(Order order, Part part, int quantity) {
+        this.order = order;
+        this.part = part;
         this.quantity = quantity;
+        this.submit = 0;
     }
 
-
-
-    // Gettery i Settery
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public int getOrderId() { return orderId; }
-    public void setOrderId(int orderId) { this.orderId = orderId; }
-    public int getPartId() { return partId; }
-    public void setPartId(int partId) { this.partId = partId; }
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
-    public int getSubmit() {
-        return submit;
+    public int getOrderId() {
+        return order != null ? order.getId() : 0;
     }
-    public void setSubmit(int submit) {
-        this.submit = submit;
+
+    public int getPartId() {
+        return part != null ? part.getId() : 0;
     }
 }

@@ -56,7 +56,7 @@ public class PutPanelController {
     private void loadAllProcessingParts() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Tabela pokazuje co czeka na odłożenie nowe i zwroty
-            String hql = "FROM Part WHERE status = 'PROCESSING' OR status = 'RETURNED'";
+            String hql = "FROM Part WHERE status = models.PartStatus.PROCESSING OR status = models.PartStatus.RETURNED";
             Query<Part> query = session.createQuery(hql, Part.class);
 
             List<Part> results = query.list();
@@ -78,7 +78,7 @@ public class PutPanelController {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Pobieramy ID tylko dla tych produktów z poczekalni, które mają ten numer
-            String hql = "SELECT p.id FROM Part p WHERE p.partNr = :nr AND (p.status = 'PROCESSING' OR p.status = 'RETURNED')";
+            String hql = "SELECT p.id FROM Part p WHERE p.partNr = :nr AND (p.status = models.PartStatus.PROCESSING OR p.status = models.PartStatus.RETURNED)";
             Query<Integer> query = session.createQuery(hql, Integer.class);
             query.setParameter("nr", partNr);
 
@@ -125,7 +125,7 @@ public class PutPanelController {
 
             if (part != null) {
                 part.setLocation(location);
-                part.setStatus("PUTTED");
+                part.setStatus(models.PartStatus.PUTTED);
                 session.update(part);
                 tx.commit();
 

@@ -75,14 +75,20 @@ public class OrderAddController {
         try {
             tx = session.beginTransaction();
 
+            int workerId = Integer.parseInt(workerIdStr);
+            models.User worker = session.get(models.User.class, workerId);
+            if (worker == null) {
+                throw new RuntimeException("Nie znaleziono pracownika o ID: " + workerId);
+            }
+
             Order newOrder = new Order();
             newOrder.setClient(client);
-            newOrder.setUserId(Integer.parseInt(workerIdStr));
+            newOrder.setUser(worker);
             newOrder.setOrderDate(new Timestamp(System.currentTimeMillis()));
-            newOrder.setStatus("INPROGRESS");
+            newOrder.setStatus(models.OrderStatus.INPROGRESS);
 
             session.save(newOrder);
-            allocateItems(session, newOrder.getId());
+            allocateItems(session, newOrder);
 
             tx.commit();
             orderIDLabel.setText("Zamówienie nr: " + newOrder.getId());
@@ -100,7 +106,7 @@ public class OrderAddController {
     }
 
     // ... fragment metody allocateItems w OrderAddController ...
-    private void allocateItems(Session session, int orderId) {
+    private void allocateItems(Session session, Order order) {
         TextField[] partFields = {part1Field, part2Field, part3Field, part4Field, part5Field, part6Field, part7Field, part8Field, part9Field, part10Field};
         TextField[] qtyFields = {quantity1Field, quantity2Field, quantity3Field, quantity4Field, quantity5Field, quantity6Field, quantity7Field, quantity8Field, quantity9Field, quantity10Field};
 
@@ -112,7 +118,7 @@ public class OrderAddController {
                 int remainingToAllocate = Integer.parseInt(qtyStr);
 
                 // Pobieramy dostępne sztuki (status PUTTED lub RETURNED)
-                Query<Part> query = session.createQuery("FROM Part WHERE partNr = :nr AND quantity > 0 AND (status = 'PUTTED' OR status = 'RETURNED') ORDER BY quantity DESC", Part.class);
+                Query<Part> query = session.createQuery("FROM Part WHERE partNr = :nr AND quantity > 0 AND (status = models.PartStatus.PUTTED OR status = models.PartStatus.RETURNED) ORDER BY quantity DESC", Part.class);
                 query.setParameter("nr", partNr);
                 List<Part> availableStocks = query.list();
 
@@ -123,8 +129,8 @@ public class OrderAddController {
 
                     // TWORZYMY POZYCJĘ ZAMÓWIENIA
                     OrderList item = new OrderList();
-                    item.setOrderId(orderId);
-                    item.setPartId(stock.getId());
+                    item.setOrder(order);
+                    item.setPart(stock);
                     item.setQuantity(take);
                     item.setSubmit(0); // Jeszcze nie zebrane
                     session.save(item);
@@ -132,7 +138,7 @@ public class OrderAddController {
                     // REZERWACJA: Odejmujemy ze stanu głównego od razu
                     stock.setQuantity(stock.getQuantity() - take);
                     if (stock.getQuantity() == 0) {
-                        stock.setStatus("OUT_OF_STOCK");
+                        stock.setStatus(models.PartStatus.OUT_OF_STOCK);
                     }
                     session.update(stock);
 

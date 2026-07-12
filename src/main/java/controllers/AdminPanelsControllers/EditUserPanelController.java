@@ -26,7 +26,8 @@ public class EditUserPanelController {
     @FXML private TableColumn<User, String> colName, colName1, colRole;
     @FXML private TableColumn<User, Timestamp> colCreatedAt;
 
-    @FXML private TextField loginField, paswfield, nameField, LastnameField, roleField;
+    @FXML private TextField loginField, nameField, LastnameField, roleField;
+    @FXML private PasswordField paswfield;
     @FXML private Button saveBut, adminmenuBut;
 
     private User selectedUser;
@@ -60,10 +61,10 @@ public class EditUserPanelController {
 
     private void fillFields(User user) {
         loginField.setText(user.getLogin());
-        paswfield.setText(user.getPassword());
+        paswfield.setText(""); // Nigdy nie wyświetlamy hasha hasła
         nameField.setText(user.getFirstName());
         LastnameField.setText(user.getLastName());
-        roleField.setText(user.getRole());
+        roleField.setText(user.getRole() != null ? user.getRole().name() : "");
     }
 
     @FXML
@@ -91,7 +92,7 @@ public class EditUserPanelController {
         if (login.length() <= 3) {
             errorMessages.append("- Login musi być dłuższy niż 3 znaki.\n");
         }
-        if (password.length() < 5 || !password.matches(".*[A-Z].*") || !password.matches(".*\\d.*")) {
+        if (!password.isEmpty() && (password.length() < 5 || !password.matches(".*[A-Z].*") || !password.matches(".*\\d.*"))) {
             errorMessages.append("- Hasło: min. 5 znaków, 1 wielka litera, 1 cyfra.\n");
         }
         if (!role.equals("ADMIN") && !role.equals("PUT") && !role.equals("ORDER")) {
@@ -109,10 +110,13 @@ public class EditUserPanelController {
             tx = session.beginTransaction();
 
             selectedUser.setLogin(login);
-            selectedUser.setPassword(password);
+            // Haszujemy hasło tylko jeśli wpisano nowe (nie jest pustym polem)
+            if (!password.isEmpty()) {
+                selectedUser.setPassword(org.mindrot.jbcrypt.BCrypt.hashpw(password, org.mindrot.jbcrypt.BCrypt.gensalt()));
+            }
             selectedUser.setFirstName(firstName);
             selectedUser.setLastName(lastName);
-            selectedUser.setRole(role);
+            selectedUser.setRole(models.UserRole.valueOf(role.toUpperCase()));
 
             session.update(selectedUser);
             tx.commit();

@@ -42,7 +42,7 @@ public class EditPartController {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         // Widoczność przycisków na podstawie roli
-        if ("ADMIN".equalsIgnoreCase(LoginController.loggedUser.getRole())) {
+        if (models.UserRole.ADMIN == LoginController.loggedUser.getRole()) {
             adminMenuBut.setVisible(true);
             menuBut.setVisible(false);
         } else {
@@ -78,24 +78,27 @@ public class EditPartController {
         }
 
         //  Logika zmiany statusu na podstawie ilości i stanu
-        String currentStatus = selectedPart.getStatus();
+        models.PartStatus currentStatus = selectedPart.getStatus();
         String currentLocation = selectedPart.getLocation();
 
         if (newQty == 0) {
-            selectedPart.setStatus("OUT_OF_STOCK");
-        } else if ("OUT_OF_STOCK".equalsIgnoreCase(currentStatus) &&
+            selectedPart.setStatus(models.PartStatus.OUT_OF_STOCK);
+        } else if (currentStatus == models.PartStatus.OUT_OF_STOCK &&
                 (currentLocation == null || currentLocation.isEmpty()) &&
                 newQty > 0) {
-            selectedPart.setStatus("RETURNED");
+            selectedPart.setStatus(models.PartStatus.RETURNED);
         }
+
+        String inputLocation = locationfFeld.getText().trim();
+        String newLoc = inputLocation.isEmpty() ? null : inputLocation;
 
         // Sprawdzenie czy coś się zmieniło (w tym status)
         boolean hasChanged = !selectedPart.getPartNr().equals(NewPartNrField.getText()) ||
                 !selectedPart.getName().equals(newPartNameField.getText()) ||
                 selectedPart.getQuantity() != newQty ||
-                !selectedPart.getLocation().equals(locationfFeld.getText());
+                !java.util.Objects.equals(selectedPart.getLocation(), newLoc);
 
-        if (hasChanged || !selectedPart.getStatus().equals(currentStatus)) {
+        if (hasChanged || selectedPart.getStatus() != currentStatus) {
             Transaction tx = null;
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 tx = session.beginTransaction();
@@ -103,7 +106,7 @@ public class EditPartController {
                 selectedPart.setPartNr(NewPartNrField.getText());
                 selectedPart.setName(newPartNameField.getText());
                 selectedPart.setQuantity(newQty);
-                selectedPart.setLocation(locationfFeld.getText());
+                selectedPart.setLocation(newLoc);
 
                 session.update(selectedPart);
                 tx.commit();
@@ -112,6 +115,7 @@ public class EditPartController {
             } catch (Exception e) {
                 if (tx != null) tx.rollback();
                 e.printStackTrace();
+                showAlert("Błąd", "Nie udało się zapisać zmian: " + e.getMessage());
             }
         }
     }
@@ -136,7 +140,7 @@ public class EditPartController {
         NewPartNrField.setText(part.getPartNr());
         newPartNameField.setText(part.getName());
         newQuantityFieldq.setText(String.valueOf(part.getQuantity()));
-        locationfFeld.setText(part.getLocation());
+        locationfFeld.setText(part.getLocation() != null ? part.getLocation() : "");
     }
 
     @FXML
@@ -149,12 +153,16 @@ public class EditPartController {
             Transaction tx = null;
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 tx = session.beginTransaction();
-                session.delete(selectedPart);
+                // merge() przywiązuje obiekt z oderwane sesji do nowej sesji
+                Part managed = (Part) session.merge(selectedPart);
+                session.delete(managed);
                 tx.commit();
                 partListData.remove(selectedPart);
                 clearFields();
             } catch (Exception e) {
                 if (tx != null) tx.rollback();
+                e.printStackTrace();
+                showAlert("Błąd", "Nie udało się usunąć produktu: " + e.getMessage());
             }
         }
     }
@@ -175,7 +183,7 @@ public class EditPartController {
 
     @FXML
     public void AdminMenuAction() {
-        if ("ADMIN".equalsIgnoreCase(LoginController.loggedUser.getRole())) {
+        if (models.UserRole.ADMIN == LoginController.loggedUser.getRole()) {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/view/AdminPanels/AdminPanel.fxml"));
                 Stage stage = (Stage) adminMenuBut.getScene().getWindow();

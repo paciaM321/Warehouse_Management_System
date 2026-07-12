@@ -29,11 +29,14 @@ public class LoginController {
 
     public User validateLogin(String login, String password) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String hql = "FROM User WHERE login = :login AND password = :password";
+            String hql = "FROM User WHERE login = :login";
             Query<User> query = session.createQuery(hql, User.class);
             query.setParameter("login", login);
-            query.setParameter("password", password);
-            return query.uniqueResult();
+            User user = query.uniqueResult();
+            if (user != null && org.mindrot.jbcrypt.BCrypt.checkpw(password, user.getPassword())) {
+                return user;
+            }
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -70,8 +73,7 @@ public class LoginController {
             loggedUser = user;
             String fxmlPath = "";
             String title = "";
-            String role = user.getRole().toUpperCase();
-            loggedUser = user;
+            String role = user.getRole().name();
 
             switch (role) {
                 case "ADMIN":

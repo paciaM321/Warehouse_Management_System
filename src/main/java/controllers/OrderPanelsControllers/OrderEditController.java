@@ -45,7 +45,7 @@ public class OrderEditController {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         // Zarządzanie widocznością przycisków (bez setManaged)
-        if ("ADMIN".equalsIgnoreCase(LoginController.loggedUser.getRole())) {
+        if (models.UserRole.ADMIN == LoginController.loggedUser.getRole()) {
             adminMenuBut.setVisible(true);
             menuBut.setVisible(false);
         } else {
@@ -66,7 +66,7 @@ public class OrderEditController {
     private void loadOrders() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Pobieramy tylko te, które nie są jeszcze spakowane
-            Query<Order> query = session.createQuery("FROM Order WHERE status != 'PACKED'", Order.class);
+            Query<Order> query = session.createQuery("FROM Order WHERE status != models.OrderStatus.PACKED", Order.class);
             ordersTable.setItems(FXCollections.observableArrayList(query.list()));
         }
     }
@@ -79,11 +79,11 @@ public class OrderEditController {
         orderIDField.setText(String.valueOf(order.getId()));
         clientField.setText(order.getClient());
         userIDField.setText(String.valueOf(order.getUserId()));
-        statusField.setText(order.getStatus());
+        statusField.setText(order.getStatus() != null ? order.getStatus().name() : "");
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Pobieranie przedmiotów przypisanych do tego zamówienia
-            Query<OrderList> query = session.createQuery("FROM OrderList WHERE orderId = :oId", OrderList.class);
+            Query<OrderList> query = session.createQuery("FROM OrderList WHERE order.id = :oId", OrderList.class);
             query.setParameter("oId", order.getId());
             List<OrderList> items = query.list();
 
@@ -167,12 +167,16 @@ public class OrderEditController {
             Order orderToUpdate = session.get(Order.class, orderId);
             if (orderToUpdate != null) {
                 orderToUpdate.setClient(client);
-                orderToUpdate.setUserId(Integer.parseInt(userIdStr));
-                orderToUpdate.setStatus(status);
+                models.User worker = session.get(models.User.class, Integer.parseInt(userIdStr));
+                if (worker == null) {
+                    throw new RuntimeException("Nie znaleziono pracownika o ID: " + userIdStr);
+                }
+                orderToUpdate.setUser(worker);
+                orderToUpdate.setStatus(models.OrderStatus.valueOf(status));
                 session.update(orderToUpdate);
             }
 
-            updateOrderItems(session, orderId);
+            updateOrderItems(session, orderToUpdate);
 
             tx.commit();
             showAlert("Sukces", "Zmiany w zamówieniu nr " + orderId + " zostały zapisane.");
@@ -184,7 +188,7 @@ public class OrderEditController {
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
-            showAlert("Błąd", "Nie udało się zapisać zmian. Sprawdź czy ID pracownika istnieje.");
+            showAlert("Błąd", "Nie udało się zapisać zmian: " + e.getMessage());
         }
     }
 
@@ -205,15 +209,15 @@ public class OrderEditController {
         alert.showAndWait();
     }
 
-    private void updateOrderItems(Session session, int orderId) {
+    private void updateOrderItems(Session session, Order order) {
         // Tablice pól z FXML
         TextField[] nrFields = {part1Field, part2Field, part3Field, part4Field, part5Field, part6Field, part7Field, part8Field, part9Field, part10Field};
         TextField[] qtyFields = {quantity1Field, quantity2Field, quantity3Field, quantity4Field, quantity5Field, quantity6Field, quantity7Field, quantity8Field, quantity9Field, quantity10Field};
         TextField[] idFields = {partID1Field, partID2Field, partID3Field, partID4Field, partID5Field, partID6Field, partID7Field, partID8Field, partID9Field, partID10Field};
 
         // Pobieramy aktualne pozycje z bazy, aby wiedzieć co edytować
-        Query<OrderList> query = session.createQuery("FROM OrderList WHERE orderId = :oId", OrderList.class);
-        query.setParameter("oId", orderId);
+        Query<OrderList> query = session.createQuery("FROM OrderList WHERE order.id = :oId", OrderList.class);
+        query.setParameter("oId", order.getId());
         List<OrderList> existingItems = query.list();
 
         for (int i = 0; i < 10; i++) {
@@ -226,24 +230,87 @@ public class OrderEditController {
                 // Sprawdzamy, czy ta pozycja (i-ta) już istniała w bazie
                 if (i < existingItems.size()) {
                     OrderList item = existingItems.get(i);
-                    item.setQuantity(quantity);
-                    session.update(item);
+                    int oldQuantity = item.getQuantity();
+                    int diff = quantity - oldQuantity;
+
+                    if (diff != 0) {
+                        Part stock = item.getPart();
+                        if (stock != null) {
+                            if (diff > 0) {
+                                // Zwiększamy ilość w zamówieniu -> sprawdzamy czy na półce jest wystarczająco dużo sztuk
+                                if (stock.getQuantity() < diff) {
+                                    throw new RuntimeException("Brak wystarczającej ilości na półce (" + (stock.getLocation() != null ? stock.getLocation() : "BRAK") + ") dla części: " + partNr);
+                                }
+                                stock.setQuantity(stock.getQuantity() - diff);
+                                if (stock.getQuantity() == 0) {
+                                    stock.setStatus(models.PartStatus.OUT_OF_STOCK);
+                                }
+                                session.update(stock);
+                            } else {
+                                // Zmniejszamy ilość w zamówieniu -> zwracamy towar na stan
+                                int returnedQty = -diff;
+                                stock.setQuantity(stock.getQuantity() + returnedQty);
+                                if (stock.getStatus() == models.PartStatus.OUT_OF_STOCK) {
+                                    stock.setStatus(models.PartStatus.RETURNED);
+                                }
+                                session.update(stock);
+                            }
+                        }
+
+                        if (quantity == 0) {
+                            session.delete(item);
+                        } else {
+                            item.setQuantity(quantity);
+                            session.update(item);
+                        }
+                    }
                 } else {
                     // Jeśli użytkownik dopisał nową pozycję w wolnym slocie
                     // Musimy znaleźć ID części na podstawie wpisanego Part Nr
-                    Query<Part> partQuery = session.createQuery("FROM Part WHERE partNr = :nr AND quantity > 0", Part.class);
+                    Query<Part> partQuery = session.createQuery("FROM Part WHERE partNr = :nr AND quantity > 0 AND (status = models.PartStatus.PUTTED OR status = models.PartStatus.RETURNED) ORDER BY quantity DESC", Part.class);
                     partQuery.setParameter("nr", partNr);
-                    partQuery.setMaxResults(1);
-                    Part part = partQuery.uniqueResult();
+                    List<Part> availableStocks = partQuery.list();
 
-                    if (part != null) {
+                    int remainingToAllocate = quantity;
+                    for (Part stock : availableStocks) {
+                        if (remainingToAllocate <= 0) break;
+
+                        int take = (int) Math.min(stock.getQuantity(), remainingToAllocate);
+
                         OrderList newItem = new OrderList();
-                        newItem.setOrderId(orderId);
-                        newItem.setPartId(part.getId());
-                        newItem.setQuantity(quantity);
+                        newItem.setOrder(order);
+                        newItem.setPart(stock);
+                        newItem.setQuantity(take);
                         newItem.setSubmit(0);
                         session.save(newItem);
+
+                        stock.setQuantity(stock.getQuantity() - take);
+                        if (stock.getQuantity() == 0) {
+                            stock.setStatus(models.PartStatus.OUT_OF_STOCK);
+                        }
+                        session.update(stock);
+
+                        remainingToAllocate -= take;
                     }
+
+                    if (remainingToAllocate > 0) {
+                        throw new RuntimeException("Brak wolnego towaru na magazynie dla numeru: " + partNr);
+                    }
+                }
+            } else {
+                // Jeśli oba pola są puste, ale pozycja istniała w bazie -> użytkownik ją usunął
+                if (i < existingItems.size()) {
+                    OrderList item = existingItems.get(i);
+                    Part stock = item.getPart();
+                    if (stock != null) {
+                        // Zwracamy całość towaru do stanu magazynowego
+                        stock.setQuantity(stock.getQuantity() + item.getQuantity());
+                        if (stock.getStatus() == models.PartStatus.OUT_OF_STOCK) {
+                            stock.setStatus(models.PartStatus.RETURNED);
+                        }
+                        session.update(stock);
+                    }
+                    session.delete(item);
                 }
             }
         }
@@ -252,7 +319,7 @@ public class OrderEditController {
     @FXML
     public void AdminMenuAction() {
         User currentUser = LoginController.loggedUser;
-        if (currentUser != null && "ADMIN".equalsIgnoreCase(currentUser.getRole())) {
+        if (currentUser != null && models.UserRole.ADMIN == currentUser.getRole()) {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/view/AdminPanels/AdminPanel.fxml"));
 

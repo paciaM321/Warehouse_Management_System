@@ -1,43 +1,46 @@
 package models;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "orders")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "user_id")
-    private int userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "order_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
 
+    @Column(nullable = false)
     private String client;
-    private String status;
 
-    public Order() {}
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private OrderStatus status;
 
-    public Order(int userId, String status,String client) {
-        this.userId = userId;
+    public Order(User user, OrderStatus status, String client) {
+        this.user = user;
         this.status = status;
         this.client = client;
-        this.orderDate = new Date(); // Automatyczna data zamówienia
+        this.orderDate = new Date();
     }
 
-    // Gettery i Settery
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
-    public Date getOrderDate() { return orderDate; }
-    public void setOrderDate(Date orderDate) { this.orderDate = orderDate; }
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
-    public String getClient() {return client; }
-    public void setClient(String client) {this.client = client; }
+    public int getUserId() {
+        return user != null ? user.getId() : 0;
+    }
 }
